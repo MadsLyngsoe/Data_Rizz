@@ -10,9 +10,9 @@ const d3 = require('d3');
 const spec = {
   {
     "$schema": "https://vega.github.io/schema/vega/v5.json",
-    "description": "A basic scatter plot example depicting transfer statistics.",
-    "width": 200,
-    "height": 200,
+    "description": "A basic scatter plot example depicting automobile statistics.",
+    "width": 400,
+    "height": 400,
     "padding": 5,
   
     "data": [
@@ -26,10 +26,8 @@ const spec = {
     "scales": [
       {
         "name": "x",
-        "type": "linear",
+        "type": "band",
         "round": true,
-        "nice": true,
-        "zero": true,
         "domain": {"data": "source", "field": "year"},
         "range": "width"
       },
@@ -42,15 +40,15 @@ const spec = {
         "domain": {"data": "source", "field": "fee"},
         "range": "height"
       },
-      /*{
+      {
         "name": "size",
         "type": "linear",
         "round": true,
         "nice": false,
         "zero": true,
-        "domain": {"data": "source", "field": "Acceleration"},
+        "domain": {"data": "source", "field": "fee"},
         "range": [4,361]
-      }*/
+      }
     ],
   
     "axes": [
@@ -59,8 +57,9 @@ const spec = {
         "grid": true,
         "domain": false,
         "orient": "bottom",
-        "tickCount": 5,
-        "title": "Year"
+        "tickCount": 10,
+        "labelOverlap": "parity",
+        "title": "Tranfer Year"
       },
       {
         "scale": "y",
@@ -68,22 +67,9 @@ const spec = {
         "domain": false,
         "orient": "left",
         "titlePadding": 5,
-        "title": "fee"
+        "title": "Transfer Fee"
       }
     ],
-  
-    /*"legends": [
-      {
-        "size": "size",
-        "title": "Acceleration",
-        "format": "s",
-        "symbolStrokeColor": "#4682b4",
-        "symbolStrokeWidth": 2,
-        "symbolOpacity": 0.5,
-        "symbolType": "circle"
-      }
-    ],*/
-  
     "marks": [
       {
         "name": "marks",
@@ -93,7 +79,7 @@ const spec = {
           "update": {
             "x": {"scale": "x", "field": "year"},
             "y": {"scale": "y", "field": "fee"},
-            "size": {"scale": "size", "field": "year"},
+            "size": {"scale": "size", "field": "fee"},
             "shape": {"value": "circle"},
             "strokeWidth": {"value": 2},
             "opacity": {"value": 0.5},
@@ -104,6 +90,7 @@ const spec = {
       }
     ]
   }
+  
 
 };
 
