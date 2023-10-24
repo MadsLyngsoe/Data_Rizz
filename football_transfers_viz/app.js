@@ -18,7 +18,8 @@ const spec = {
     "data": [
       {
         "name": "source",
-        "url": "data\premier-league.csv",
+        "url": "https://raw.githubusercontent.com/MadsLyngsoe/Data_Rizz/main/data/premier-league.csv",
+        "format": {"type": "csv"}
       }
     ],
   
