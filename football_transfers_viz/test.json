@@ -8,8 +8,28 @@
   "data": [
     {
       "name": "source",
-      "url": "https://raw.githubusercontent.com/MadsLyngsoe/Data_Rizz/main/data/premier-league.csv",
-      "format": {"type": "csv"}
+      "url": "https://raw.githubusercontent.com/MadsLyngsoe/Data_Rizz/main/data/eredivisie.csv",
+      "format": { "type": "csv" },
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.fee_cleaned > 0"
+        },
+        { "type": "filter", "expr": "datum.transfer_movement === 'out'" },
+        {
+          "type": "filter",
+          "expr": "datum.club_name === 'Ajax Amsterdam'"
+        },
+        {
+          "type": "formula",
+          "as": "year_numeric",
+          "expr": "toNumber(datum.year)"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.year_numeric > 2000"
+        }
+      ]
     }
   ],
 
@@ -18,7 +38,7 @@
       "name": "x",
       "type": "band",
       "round": true,
-      "domain": {"data": "source", "field": "year"},
+      "domain": { "data": "source", "field": "year" },
       "range": "width"
     },
     {
@@ -27,7 +47,7 @@
       "round": true,
       "nice": true,
       "zero": true,
-      "domain": {"data": "source", "field": "fee_cleaned"},
+      "domain": { "data": "source", "field": "fee_cleaned" },
       "range": "height"
     }
   ],
@@ -48,23 +68,38 @@
       "domain": false,
       "orient": "left",
       "titlePadding": 5,
-      "title": "Transfer Fee (Million £)"
+      "title": "Transfer Fee (Million EUR)"
     }
   ],
   "marks": [
     {
-      "name": "marks",
+      "name": "dots",
       "type": "symbol",
-      "from": {"data": "source"},
+      "from": { "data": "source" },
       "encode": {
         "update": {
-          "x": {"scale": "x", "field": "year"},
-          "y": {"scale": "y", "field": "fee_cleaned"},
-          "shape": {"value": "circle"},
-          "strokeWidth": {"value": 2},
-          "opacity": {"value": 0.5},
-          "stroke": {"value": "#4682b4"},
-          "fill": {"value": "transparent"}
+          "x": { "scale": "x", "field": "year" },
+          "y": { "scale": "y", "field": "fee_cleaned" },
+          "shape": { "value": "circle" },
+          "strokeWidth": { "value": 2 },
+          "opacity": { "value": 0.5 },
+          "stroke": { "value": "#4682b4" },
+          "fill": { "value": "transparent" }
+        }
+      }
+    },
+    {
+      "name": "text",
+      "type": "text",
+      "from": { "data": "dots" },
+      "encode": {
+        "update": {
+          "x": { "field": "x" },
+          "y": { "field": "y", "offset": -10 },
+          "text": { "field": "datum.player_name" },
+          "fontSize": { "value": 12 },
+          "align": { "value": "center" },
+          "baseline": { "value": "bottom" }
         }
       }
     }
