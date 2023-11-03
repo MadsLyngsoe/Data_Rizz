@@ -1,3 +1,4 @@
+
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "A basic scatter plot example depicting automobile statistics.",
@@ -9,10 +10,6 @@
     {
       "name": "year", "value": "2000",
       "bind": {"input": "range", "min": 1992, "max": 2023, "step": 1}
-    },
-    {
-      "name": "op", "value": "Ajax Amsterdam",
-      "bind": {"input": "select", "options": ["Ajax Amsterdam", "Fortuna Sittard", "Feyenoord Rotterdam"]}
     }
   ],
 
@@ -20,17 +17,16 @@
   "data": [
     {
       "name": "source",
-      "url": "https://raw.githubusercontent.com/MadsLyngsoe/Data_Rizz/main/data/eredivisie.csv",
+      "url": "/data/eredivisie.csv",
       "format": { "type": "csv" },
       "transform": [
         {
           "type": "filter",
           "expr": "datum.fee_cleaned > 0"
         },
-        { "type": "filter", "expr": "datum.transfer_movement === 'out'" },
         {
           "type": "filter",
-          "expr": "datum.club_name === op"
+          "expr": "datum.club_name == 'Ajax Amsterdam'"
         },
         {
           "type": "formula",
@@ -41,6 +37,17 @@
           "type": "filter",
           "expr": "datum.year_numeric <= year"
         }
+      ]
+    },
+    {
+      "name": "summaryData",
+      "source": "source",
+      "transform": [{
+        "type": "aggregate",
+        "fields": ["fee_cleaned"],
+        "ops": ["sum"],
+        "as": ["total_fee_cleaned"]
+      }
       ]
     }
   ],
@@ -86,12 +93,12 @@
   "marks": [
     {
       "name": "dots",
-      "type": "symbol",
+      "type": "line",
       "from": { "data": "source" },
       "encode": {
         "update": {
           "x": { "scale": "x", "field": "year" },
-          "y": { "scale": "y", "field": "fee_cleaned" },
+          "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
           "opacity": { "value": 0.5 },
@@ -108,7 +115,7 @@
         "update": {
           "x": { "field": "x" },
           "y": { "field": "y", "offset": -10 },
-          "text": { "field": "datum.player_name" },
+          "text": { "field": "year" },
           "fontSize": { "value": 12 },
           "align": { "value": "center" },
           "baseline": { "value": "bottom" }
