@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "A basic scatter plot example depicting automobile statistics.",
-  "width": 1080,
+  "width": 300,
   "height": 300,
   "padding": 5,
 
@@ -9,10 +9,6 @@
     {
       "name": "year", "value": "2000",
       "bind": {"input": "range", "min": 1992, "max": 2023, "step": 1}
-    },
-    {
-      "name": "op", "value": "Ajax Amsterdam",
-      "bind": {"input": "select", "options": ["Ajax Amsterdam", "Fortuna Sittard", "Feyenoord Rotterdam"]}
     }
   ],
 
@@ -30,7 +26,7 @@
         { "type": "filter", "expr": "datum.transfer_movement === 'out'" },
         {
           "type": "filter",
-          "expr": "datum.club_name === op"
+          "expr": "datum.club_name === 'Ajax Amsterdam'"
         },
         {
           "type": "formula",
