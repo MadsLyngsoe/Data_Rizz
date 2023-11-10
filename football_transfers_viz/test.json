@@ -2,7 +2,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "A basic scatter plot example depicting automobile statistics.",
-  "width": 1080,
+  "width": 1000,
   "height": 300,
   "padding": 5,
 
@@ -299,7 +299,7 @@
         {
           "type": "formula",
           "as": "fee_numeric",
-          "expr": "format(datum.fee_cleaned, ',.0f')"
+          "expr": "format(datum.fee_cleaned, ',.0f')" 
         },
         {
           "type": "aggregate",
@@ -317,7 +317,7 @@
       "name": "x",
       "type": "band",
       "round": true,
-      "domain": { "data": "premier-league", "field": "year_numeric" },
+      "domain": { "data": "serie-a", "field": "year_numeric" },
       "range": "width"
     },
     {
@@ -328,6 +328,12 @@
       "zero": true,
       "domain": { "data": "premier-league", "field": "total_fee_cleaned" },
       "range": "height"
+    },
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": ["Bundesliga", "Championship", "Eredivisie", "Liga Nos", "Ligue 1", "Premier League", "Premier Liga", "Primera division", "Serie A"],
+      "range": ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6"]
     }
   ],
 
@@ -351,6 +357,27 @@
     }
   ],
 
+  "legends": [
+    {
+      "fill": "color",
+      "orient": "left",
+      "encode": {
+        "title": {
+          "update": {
+            "fontSize": {"value": 14}
+          }
+        },
+        "labels": {
+          "interactive": false,
+          "update": {
+            "fontSize": {"value": 12},
+            "fill": {"value": "black"}
+          }
+        }
+      }
+    }
+  ],
+
   "marks": [
     {
       "name": "1-bundesliga-marks",
@@ -363,7 +390,7 @@
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
           "opacity": { "value": 0.5 },
-          "stroke": { "value": "red" },
+          "stroke": { "value": "#a6cee3" },
           "fill": { "value": "transparent" }
         }
       }
@@ -377,22 +404,8 @@
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
-          "stroke": { "value": "red" },
-          "fill": { "value": "red" }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "from": { "data": "1-bundesliga-marks" },
-      "encode": {
-        "update": {
-          "x": { "field": "x" },
-          "y": { "field": "y", "offset": -6 },
-          "text": {"field": "datum.total_fee_cleaned"},
-          "fontSize": { "value": 12 },
-          "align": { "value": "center" },
-          "baseline": { "value": "bottom" }
+          "stroke": { "value": "#a6cee3" },
+          "fill": { "value": "#a6cee3" }
         }
       }
     },
@@ -408,7 +421,7 @@
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
           "opacity": { "value": 0.5 },
-          "stroke": { "value": "black" },
+          "stroke": { "value": "#1f78b4" },
           "fill": { "value": "transparent" }
         }
       }
@@ -418,26 +431,13 @@
       "from": { "data": "championship" },
       "encode": {
         "update": {
+          "tooltip": {"signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Championship'}"},
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
-          "stroke": { "value": "black" },
-          "fill": { "value": "black" }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "from": { "data": "championship-marks" },
-      "encode": {
-        "update": {
-          "x": { "field": "x" },
-          "y": { "field": "y", "offset": -6 },
-          "text": {"field": "datum.total_fee_cleaned"},
-          "fontSize": { "value": 12 },
-          "align": { "value": "center" },
-          "baseline": { "value": "bottom" }
+          "stroke": { "value": "#1f78b4" },
+          "fill": { "value": "#1f78b4" }
         }
       }
     },
@@ -453,7 +453,7 @@
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
           "opacity": { "value": 0.5 },
-          "stroke": { "value": "#FFA500" },
+          "stroke": { "value": "#b2df8a" },
           "fill": { "value": "transparent" }
         }
       }
@@ -463,26 +463,13 @@
       "from": { "data": "eredivisie" },
       "encode": {
         "update": {
+          "tooltip": {"signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Eredivisie'}"},
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
-          "stroke": { "value": "#FFA500" },
-          "fill": { "value": "#FFA500" }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "from": { "data": "eredivisie-marks" },
-      "encode": {
-        "update": {
-          "x": { "field": "x" },
-          "y": { "field": "y", "offset": -6 },
-          "text": {"field": "datum.total_fee_cleaned"},
-          "fontSize": { "value": 12 },
-          "align": { "value": "center" },
-          "baseline": { "value": "bottom" }
+          "stroke": { "value": "#b2df8a" },
+          "fill": { "value": "#b2df8a" }
         }
       }
     },
@@ -498,7 +485,7 @@
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
           "opacity": { "value": 0.5 },
-          "stroke": { "value": "green" },
+          "stroke": { "value": "#33a02c" },
           "fill": { "value": "transparent" }
         }
       }
@@ -508,26 +495,13 @@
       "from": { "data": "liga-nos" },
       "encode": {
         "update": {
+          "tooltip": {"signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Liga Nos'}"},
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
-          "stroke": { "value": "green" },
-          "fill": { "value": "green" }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "from": { "data": "liga-nos-marks" },
-      "encode": {
-        "update": {
-          "x": { "field": "x" },
-          "y": { "field": "y", "offset": -6 },
-          "text": {"field": "datum.total_fee_cleaned"},
-          "fontSize": { "value": 12 },
-          "align": { "value": "center" },
-          "baseline": { "value": "bottom" }
+          "stroke": { "value": "#33a02c" },
+          "fill": { "value": "#33a02c" }
         }
       }
     },
@@ -543,7 +517,7 @@
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
           "opacity": { "value": 0.5 },
-          "stroke": { "value": "purple" },
+          "stroke": { "value": "#fb9a99" },
           "fill": { "value": "transparent" }
         }
       }
@@ -553,30 +527,17 @@
       "from": { "data": "ligue-1" },
       "encode": {
         "update": {
+          "tooltip": {"signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Ligue 1'}"},
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
-          "stroke": { "value": "purple" },
-          "fill": { "value": "purple" }
+          "stroke": { "value": "#fb9a99" },
+          "fill": { "value": "#fb9a99" }
         }
       }
     },
-    {
-      "type": "text",
-      "from": { "data": "ligue-1-marks" },
-      "encode": {
-        "update": {
-          "x": { "field": "x" },
-          "y": { "field": "y", "offset": -6 },
-          "text": {"field": "datum.total_fee_cleaned"},
-          "fontSize": { "value": 12 },
-          "align": { "value": "center" },
-          "baseline": { "value": "bottom" }
-        }
-      }
-    },
-
+ 
     {
       "name": "premier-league-marks",
       "type": "line",
@@ -588,7 +549,7 @@
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
           "opacity": { "value": 0.5 },
-          "stroke": { "value": "#4682b4" },
+          "stroke": { "value": "#e31a1c" },
           "fill": { "value": "transparent" }
         }
       }
@@ -598,26 +559,13 @@
       "from": { "data": "premier-league" },
       "encode": {
         "update": {
+          "tooltip": {"signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Premier League'}"},
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
-          "stroke": { "value": "#4682b4" },
-          "fill": { "value": "#4682b4" }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "from": { "data": "premier-league-marks" },
-      "encode": {
-        "update": {
-          "x": { "field": "x" },
-          "y": { "field": "y", "offset": -10 },
-          "text": {"field": "datum.total_fee_cleaned"},
-          "fontSize": { "value": 12 },
-          "align": { "value": "center" },
-          "baseline": { "value": "bottom" }
+          "stroke": { "value": "#e31a1c" },
+          "fill": { "value": "#e31a1c" }
         }
       }
     },
@@ -633,7 +581,7 @@
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
           "opacity": { "value": 0.5 },
-          "stroke": { "value": "grey" },
+          "stroke": { "value": "#fdbf6f" },
           "fill": { "value": "transparent" }
         }
       }
@@ -643,26 +591,13 @@
       "from": { "data": "premier-liga" },
       "encode": {
         "update": {
+          "tooltip": {"signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Premier Liga'}"},
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
-          "stroke": { "value": "grey" },
-          "fill": { "value": "grey" }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "from": { "data": "premier-liga-marks" },
-      "encode": {
-        "update": {
-          "x": { "field": "x" },
-          "y": { "field": "y", "offset": -10 },
-          "text": {"field": "datum.total_fee_cleaned"},
-          "fontSize": { "value": 12 },
-          "align": { "value": "center" },
-          "baseline": { "value": "bottom" }
+          "stroke": { "value": "#fdbf6f" },
+          "fill": { "value": "#fdbf6f" }
         }
       }
     },
@@ -678,7 +613,7 @@
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
           "opacity": { "value": 0.5 },
-          "stroke": { "value": "grey" },
+          "stroke": { "value": "#ff7f00" },
           "fill": { "value": "transparent" }
         }
       }
@@ -688,26 +623,13 @@
       "from": { "data": "primera-division" },
       "encode": {
         "update": {
+          "tooltip": {"signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Primera Division'}"},
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
-          "stroke": { "value": "grey" },
-          "fill": { "value": "grey" }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "from": { "data": "primera-division-marks" },
-      "encode": {
-        "update": {
-          "x": { "field": "x" },
-          "y": { "field": "y", "offset": -10 },
-          "text": {"field": "datum.total_fee_cleaned"},
-          "fontSize": { "value": 12 },
-          "align": { "value": "center" },
-          "baseline": { "value": "bottom" }
+          "stroke": { "value": "#ff7f00" },
+          "fill": { "value": "#ff7f00" }
         }
       }
     },
@@ -723,7 +645,7 @@
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
           "opacity": { "value": 0.5 },
-          "stroke": { "value": "grey" },
+          "stroke": { "value": "#cab2d6" },
           "fill": { "value": "transparent" }
         }
       }
@@ -733,26 +655,13 @@
       "from": { "data": "serie-a" },
       "encode": {
         "update": {
+          "tooltip": {"signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Serie A'}"},
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
-          "stroke": { "value": "grey" },
-          "fill": { "value": "grey" }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "from": { "data": "serie-a-marks" },
-      "encode": {
-        "update": {
-          "x": { "field": "x" },
-          "y": { "field": "y", "offset": -10 },
-          "text": {"field": "datum.total_fee_cleaned"},
-          "fontSize": { "value": 12 },
-          "align": { "value": "center" },
-          "baseline": { "value": "bottom" }
+          "stroke": { "value": "#cab2d6" },
+          "fill": { "value": "#cab2d6" }
         }
       }
     }
