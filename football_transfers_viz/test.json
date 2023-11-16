@@ -10,6 +10,83 @@
     {
       "name": "year", "value": "2000",
       "bind": {"input": "range", "min": 1992, "max": 2023, "step": 1}
+    },
+    {
+      "name": "clear", "value": true,
+      "on": [
+        {
+          "events": "pointerup[!event.item]",
+          "update": "true",
+          "force": true
+        }
+      ]
+    },
+    {
+      "name": "shift", "value": false,
+      "on": [
+        {
+          "events": "@legendSymbol:click, @legendLabel:click",
+          "update": "event.shiftKey",
+          "force":  true
+        }
+      ]
+    },
+    {
+      "name": "clicked", "value": null,
+      "on": [
+        {
+          "events": "@legendSymbol:click, @legendLabel:click",
+          "update": "{value: datum.value}",
+          "force":  true
+        }
+      ]
+    },
+    {
+      "name": "brush", "value": 0,
+      "on": [
+        {
+          "events": {"signal": "clear"},
+          "update": "clear ? [0, 0] : brush"
+        },
+        {
+          "events": "@xaxis:pointerdown",
+          "update": "[x(), x()]"
+        },
+        {
+          "events": "[@xaxis:pointerdown, window:pointerup] > window:pointermove!",
+          "update": "[brush[0], clamp(x(), 0, width)]"
+        },
+        {
+          "events": {"signal": "delta"},
+          "update": "clampRange([anchor[0] + delta, anchor[1] + delta], 0, width)"
+        }
+      ]
+    },
+    {
+      "name": "anchor", "value": null,
+      "on": [{"events": "@brush:pointerdown", "update": "slice(brush)"}]
+    },
+    {
+      "name": "xdown", "value": 0,
+      "on": [{"events": "@brush:pointerdown", "update": "x()"}]
+    },
+    {
+      "name": "delta", "value": 0,
+      "on": [
+        {
+          "events": "[@brush:pointerdown, window:pointerup] > window:pointermove!",
+          "update": "x() - xdown"
+        }
+      ]
+    },
+    {
+      "name": "domain",
+      "on": [
+        {
+          "events": {"signal": "brush"},
+          "update": "span(brush) ? invert('x', brush) : null"
+        }
+      ]
     }
   ],
 
@@ -17,72 +94,6 @@
     {
       "name": "1-bundesliga",
       "url": "/data/1-bundesliga.csv",
-      "format": { "type": "csv" },
-      "transform": [
-        {
-          "type": "filter",
-          "expr": "datum.fee_cleaned > 0"
-        },
-        {
-          "type": "formula",
-          "as": "year_numeric",
-          "expr": "toNumber(datum.year)"
-        },
-        {
-          "type": "filter",
-          "expr": "datum.year_numeric <= year"
-        },
-        {
-          "type": "formula",
-          "as": "fee_numeric",
-          "expr": "format(datum.fee_cleaned, ',.0f')"
-        },
-        {
-          "type": "aggregate",
-          "groupby": ["year_numeric"],
-          "fields": ["fee_numeric"],
-          "ops": ["sum"],
-          "as": ["total_fee_cleaned"]
-        }
-      ]
-    },
-
-    {
-      "name": "championship",
-      "url": "/data/championship.csv",
-      "format": { "type": "csv" },
-      "transform": [
-        {
-          "type": "filter",
-          "expr": "datum.fee_cleaned > 0"
-        },
-        {
-          "type": "formula",
-          "as": "year_numeric",
-          "expr": "toNumber(datum.year)"
-        },
-        {
-          "type": "filter",
-          "expr": "datum.year_numeric <= year"
-        },
-        {
-          "type": "formula",
-          "as": "fee_numeric",
-          "expr": "format(datum.fee_cleaned, ',.0f')"
-        },
-        {
-          "type": "aggregate",
-          "groupby": ["year_numeric"],
-          "fields": ["fee_numeric"],
-          "ops": ["sum"],
-          "as": ["total_fee_cleaned"]
-        }
-      ]
-    },
-
-    {
-      "name": "eredivisie",
-      "url": "/data/eredivisie.csv",
       "format": { "type": "csv" },
       "transform": [
         {
@@ -213,39 +224,6 @@
     },
 
     {
-      "name": "premier-liga",
-      "url": "/data/premier-liga.csv",
-      "format": { "type": "csv" },
-      "transform": [
-        {
-          "type": "filter",
-          "expr": "datum.fee_cleaned > 0"
-        },
-        {
-          "type": "formula",
-          "as": "year_numeric",
-          "expr": "toNumber(datum.year)"
-        },
-        {
-          "type": "filter",
-          "expr": "datum.year_numeric <= year"
-        },
-        {
-          "type": "formula",
-          "as": "fee_numeric",
-          "expr": "format(datum.fee_cleaned, ',.0f')"
-        },
-        {
-          "type": "aggregate",
-          "groupby": ["year_numeric"],
-          "fields": ["fee_numeric"],
-          "ops": ["sum"],
-          "as": ["total_fee_cleaned"]
-        }
-      ]
-    },
-
-    {
       "name": "primera-division",
       "url": "/data/primera-division.csv",
       "format": { "type": "csv" },
@@ -309,6 +287,15 @@
           "as": ["total_fee_cleaned"]
         }
       ]
+    },
+    {
+      "name": "selected",
+      "on": [
+        {"trigger": "clear", "remove": true},
+        {"trigger": "!shift", "remove": true},
+        {"trigger": "!shift && clicked", "insert": "clicked"},
+        {"trigger": "shift && clicked", "toggle": "clicked"}
+      ]
     }
   ],
 
@@ -332,8 +319,8 @@
     {
       "name": "color",
       "type": "ordinal",
-      "domain": ["Bundesliga", "Championship", "Eredivisie", "Liga Nos", "Ligue 1", "Premier League", "Premier Liga", "Primera division", "Serie A"],
-      "range": ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6"]
+      "domain": ["Bundesliga", "Liga Nos", "Ligue 1", "Premier League", "La Liga", "Serie A"],
+      "range": ["#a6cee3", "#33a02c", "#fb9a99", "#e31a1c", "#ff7f00", "#cab2d6"]
     }
   ],
 
@@ -400,76 +387,13 @@
       "from": { "data": "1-bundesliga" },
       "encode": {
         "update": {
+          "tooltip": {"signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Bundesliga'}"},
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
           "stroke": { "value": "#a6cee3" },
           "fill": { "value": "#a6cee3" }
-        }
-      }
-    },
-
-    {
-      "name": "championship-marks",
-      "type": "line",
-      "from": { "data": "championship" },
-      "encode": {
-        "update": {
-          "x": { "scale": "x", "field": "year_numeric" },
-          "y": { "scale": "y", "field": "total_fee_cleaned" },
-          "shape": { "value": "circle" },
-          "strokeWidth": { "value": 2 },
-          "opacity": { "value": 0.5 },
-          "stroke": { "value": "#1f78b4" },
-          "fill": { "value": "transparent" }
-        }
-      }
-    },
-    {
-      "type": "symbol",
-      "from": { "data": "championship" },
-      "encode": {
-        "update": {
-          "tooltip": {"signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Championship'}"},
-          "x": { "scale": "x", "field": "year_numeric" },
-          "y": { "scale": "y", "field": "total_fee_cleaned" },
-          "shape": { "value": "circle" },
-          "strokeWidth": { "value": 2 },
-          "stroke": { "value": "#1f78b4" },
-          "fill": { "value": "#1f78b4" }
-        }
-      }
-    },
-
-    {
-      "name": "eredivisie-marks",
-      "type": "line",
-      "from": { "data": "eredivisie" },
-      "encode": {
-        "update": {
-          "x": { "scale": "x", "field": "year_numeric" },
-          "y": { "scale": "y", "field": "total_fee_cleaned" },
-          "shape": { "value": "circle" },
-          "strokeWidth": { "value": 2 },
-          "opacity": { "value": 0.5 },
-          "stroke": { "value": "#b2df8a" },
-          "fill": { "value": "transparent" }
-        }
-      }
-    },
-    {
-      "type": "symbol",
-      "from": { "data": "eredivisie" },
-      "encode": {
-        "update": {
-          "tooltip": {"signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Eredivisie'}"},
-          "x": { "scale": "x", "field": "year_numeric" },
-          "y": { "scale": "y", "field": "total_fee_cleaned" },
-          "shape": { "value": "circle" },
-          "strokeWidth": { "value": 2 },
-          "stroke": { "value": "#b2df8a" },
-          "fill": { "value": "#b2df8a" }
         }
       }
     },
@@ -571,38 +495,6 @@
     },
 
     {
-      "name": "premier-liga-marks",
-      "type": "line",
-      "from": { "data": "premier-liga" },
-      "encode": {
-        "update": {
-          "x": { "scale": "x", "field": "year_numeric" },
-          "y": { "scale": "y", "field": "total_fee_cleaned" },
-          "shape": { "value": "circle" },
-          "strokeWidth": { "value": 2 },
-          "opacity": { "value": 0.5 },
-          "stroke": { "value": "#fdbf6f" },
-          "fill": { "value": "transparent" }
-        }
-      }
-    },
-    {
-      "type": "symbol",
-      "from": { "data": "premier-liga" },
-      "encode": {
-        "update": {
-          "tooltip": {"signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Premier Liga'}"},
-          "x": { "scale": "x", "field": "year_numeric" },
-          "y": { "scale": "y", "field": "total_fee_cleaned" },
-          "shape": { "value": "circle" },
-          "strokeWidth": { "value": 2 },
-          "stroke": { "value": "#fdbf6f" },
-          "fill": { "value": "#fdbf6f" }
-        }
-      }
-    },
-
-    {
       "name": "primera-division-marks",
       "type": "line",
       "from": { "data": "primera-division" },
@@ -623,7 +515,7 @@
       "from": { "data": "primera-division" },
       "encode": {
         "update": {
-          "tooltip": {"signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Primera Division'}"},
+          "tooltip": {"signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'La Liga'}"},
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },

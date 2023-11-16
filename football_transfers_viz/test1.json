@@ -4,111 +4,134 @@
   "width": 300,
   "height": 300,
   "padding": 5,
-
   "signals": [
     {
-      "name": "year", "value": "2000",
+      "name": "year",
+      "value": "2000",
       "bind": {"input": "range", "min": 1992, "max": 2023, "step": 1}
     }
   ],
-
-
   "data": [
     {
-      "name": "source",
-      "url": "https://raw.githubusercontent.com/MadsLyngsoe/Data_Rizz/main/data/eredivisie.csv",
-      "format": { "type": "csv" },
+      "name": "1-bundesliga",
+      "url": "/data/1-bundesliga.csv",
+      "format": {"type": "csv", "delimiter": ","},
       "transform": [
-        {
-          "type": "filter",
-          "expr": "datum.fee_cleaned > 0"
-        },
-        { "type": "filter", "expr": "datum.transfer_movement === 'out'" },
-        {
-          "type": "filter",
-          "expr": "datum.club_name === 'Ajax Amsterdam'"
-        },
+        {"type": "filter", "expr": "datum.fee_cleaned > 0"},
+        {"type": "filter", "expr": "datum.transfer_movement === 'out'"},
         {
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
         },
+        {"type": "filter", "expr": "datum.year_numeric <= year"},
         {
-          "type": "filter",
-          "expr": "datum.year_numeric <= year"
+          "type": "aggregate",
+          "groupby": ["year_numeric"],
+          "fields": ["fee_numeric"],
+          "ops": ["sum"],
+          "as": ["total_fee_cleaned"]
         }
       ]
+    },
+    {
+      "name": "treeData",
+      "source": "1-bundesliga",
+      "transform": [
+        {
+          "type": "stratify",
+          "key": "year_numeric",
+          "parentKey": "parent"
+        },
+        {
+          "type": "treemap",
+          "field": "size",
+          "sort": {"field": "value"},
+          "round": true,
+          "size": [{"signal": "width"}, {"signal": "height"}]
+        }
+      ]
+    },
+    {
+      "name": "nodes",
+      "source": "1-bundesliga",
+      "transform": [{"type": "filter", "expr": "datum.children"}]
+    },
+    {
+      "name": "leaves",
+      "source": "1-bundesliga",
+      "transform": [{"type": "filter", "expr": "!datum.children"}]
     }
   ],
-
   "scales": [
     {
-      "name": "x",
-      "type": "band",
-      "round": true,
-      "domain": { "data": "source", "field": "year" },
-      "range": "width"
+      "name": "color",
+      "type": "ordinal",
+      "domain": {"data": "nodes", "field": "name"},
+      "range": [
+        "#3182bd",
+        "#6baed6",
+        "#9ecae1",
+        "#c6dbef",
+        "#e6550d",
+        "#fd8d3c",
+        "#fdae6b",
+        "#fdd0a2",
+        "#31a354",
+        "#74c476",
+        "#a1d99b",
+        "#c7e9c0",
+        "#756bb1",
+        "#9e9ac8",
+        "#bcbddc",
+        "#dadaeb",
+        "#636363",
+        "#969696",
+        "#bdbdbd",
+        "#d9d9d9"
+      ]
     },
     {
-      "name": "y",
-      "type": "linear",
-      "round": true,
-      "nice": true,
-      "zero": true,
-      "domain": { "data": "source", "field": "fee_cleaned" },
-      "range": "height"
-    }
-  ],
-
-  "axes": [
-    {
-      "scale": "x",
-      "grid": true,
-      "domain": false,
-      "orient": "bottom",
-      "tickCount": 10,
-      "labelOverlap": "parity",
-      "title": "Tranfer Year"
+      "name": "size",
+      "type": "ordinal",
+      "domain": [0, 1, 2, 3],
+      "range": [256, 28, 20, 14]
     },
     {
-      "scale": "y",
-      "grid": true,
-      "domain": false,
-      "orient": "left",
-      "titlePadding": 5,
-      "title": "Transfer Fee (Million EUR)"
+      "name": "opacity",
+      "type": "ordinal",
+      "domain": [0, 1, 2, 3],
+      "range": [0.15, 0.5, 0.8, 1]
     }
   ],
   "marks": [
     {
-      "name": "dots",
-      "type": "symbol",
-      "from": { "data": "source" },
+      "type": "rect",
+      "from": {"data": "nodes"},
+      "interactive": false,
       "encode": {
+        "enter": {"fill": {"scale": "color", "field": "name"}},
         "update": {
-          "x": { "scale": "x", "field": "year" },
-          "y": { "scale": "y", "field": "fee_cleaned" },
-          "shape": { "value": "circle" },
-          "strokeWidth": { "value": 2 },
-          "opacity": { "value": 0.5 },
-          "stroke": { "value": "#4682b4" },
-          "fill": { "value": "transparent" }
+          "x": {"field": "x0"},
+          "y": {"field": "y0"},
+          "x2": {"field": "x1"},
+          "y2": {"field": "y1"}
         }
       }
     },
     {
-      "name": "text",
-      "type": "text",
-      "from": { "data": "dots" },
+      "type": "rect",
+      "from": {"data": "leaves"},
       "encode": {
+        "enter": {"stroke": {"value": "#fff"}},
         "update": {
-          "x": { "field": "x" },
-          "y": { "field": "y", "offset": -10 },
-          "text": { "field": "datum.player_name" },
-          "fontSize": { "value": 12 },
-          "align": { "value": "center" },
-          "baseline": { "value": "bottom" }
-        }
+          "x": {"field": "x0"},
+          "y": {"field": "y0"},
+          "x2": {"field": "x1"},
+          "y2": {"field": "y1"},
+          "fill": {"value": "transparent"}
+        },
+        "hover": {"fill": {"value": "red"}}
       }
     }
   ]
