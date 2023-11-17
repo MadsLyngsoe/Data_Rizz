@@ -1,0 +1,137 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 800,
+  "height": 500,
+  "padding": { "left": 5, "right": 5, "top": 20, "bottom": 0 },
+  "autosize": "none",
+  "signals": [
+    { "name": "cx", "update": "width / 2" },
+    { "name": "cy", "update": "height / 2" },
+    {
+      "name": "gravityX",
+      "value": 0.2,
+      "bind": { "input": "range", "min": 0, "max": 1 }
+    },
+    {
+      "name": "gravityY",
+      "value": 0.1,
+      "bind": { "input": "range", "min": 0, "max": 1 }
+    }
+  ],
+  "data": [
+    {
+      "name": "1-bundesliga",
+      "url": "https://raw.githubusercontent.com/MadsLyngsoe/Data_Rizz/main/data/1-bundesliga.csv",
+      "format": { "type": "csv" },
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.fee_cleaned > 0"
+        },
+        {
+          "type": "formula",
+          "as": "year_numeric",
+          "expr": "toNumber(datum.year)"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.year_numeric === 2020"
+        },
+        {
+          "type": "formula",
+          "as": "fee_numeric",
+          "expr": "format(datum.fee_cleaned, ',.0f')"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.club_name === 'Bayern Munich'"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.transfer_movement === 'in'"
+        }
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "size",
+      "domain": { "data": "1-bundesliga", "field": "fee_cleaned" },
+      "range": [300, 800]
+    },
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": { "data": "1-bundesliga", "field": "player_name" },
+      "range": { "scheme": "category20" }
+    }
+  ],
+  "marks": [
+    {
+      "name": "nodes",
+      "type": "symbol",
+      "from": { "data": "1-bundesliga" },
+      "encode": {
+        "enter": {
+          "fill": { "scale": "color", "field": "player_name" },
+          "xfocus": { "signal": "cx" },
+          "yfocus": { "signal": "cy" }
+        },
+        "update": {
+          "size": {
+            "signal": "pow(2 * datum.fee_cleaned, 2)",
+            "scale": "size"
+          },
+          "stroke": { "value": "black" },
+          "strokeWidth": { "value": 1 },
+          "tooltip": { "signal": "datum" }
+        }
+      },
+      "transform": [
+        {
+          "type": "force",
+          "iterations": 100,
+          "static": false,
+          "forces": [
+            {
+              "force": "collide",
+              "iterations": 2,
+              "radius": { "expr": "sqrt(datum.size) / 2" }
+            },
+            {
+              "force": "center",
+              "x": { "signal": "cx" },
+              "y": { "signal": "cy" }
+            },
+            {
+              "force": "x",
+              "x": "xfocus",
+              "strength": { "signal": "gravityX" }
+            },
+            {
+              "force": "y",
+              "y": "yfocus",
+              "strength": { "signal": "gravityY" }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "from": { "data": "nodes" },
+      "encode": {
+        "enter": {
+          "align": { "value": "center" },
+          "baseline": { "value": "middle" },
+          "fontSize": { "value": 15 },
+          "fontWeight": { "value": "bold" },
+          "fill": { "value": "black" },
+          "text": { "field": "datum.player_name" }
+        },
+        "update": { "x": { "field": "x" }, "y": { "field": "y" } }
+      }
+    }
+  ]
+}
