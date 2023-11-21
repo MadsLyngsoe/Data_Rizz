@@ -398,8 +398,21 @@
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
-          "opacity": { "value": 0.5 },
-          "stroke": { "value": "#33a02c" },
+          "opacity": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
+              "value": 0.7
+            },
+            { "value": 0.15 }
+          ],
+          "stroke": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
+              "scale": "color",
+              "field": "Origin"
+            },
+            { "value": "#ccc" }
+          ],
           "fill": { "value": "transparent" }
         }
       }
@@ -416,7 +429,21 @@
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
-          "stroke": { "value": "#33a02c" },
+          "opacity": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
+              "value": 0.7
+            },
+            { "value": 0.15 }
+          ],
+          "stroke": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
+              "scale": "color",
+              "field": "Origin"
+            },
+            { "value": "#ccc" }
+          ],
           "fill": { "value": "#33a02c" }
         }
       }
