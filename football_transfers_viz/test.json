@@ -10,90 +10,6 @@
       "name": "year",
       "value": "2000",
       "bind": { "input": "range", "min": 1992, "max": 2023, "step": 1 }
-    },
-    {
-      "name": "clear",
-      "value": true,
-      "on": [
-        {
-          "events": "pointerup[!event.item]",
-          "update": "true",
-          "force": true
-        }
-      ]
-    },
-    {
-      "name": "shift",
-      "value": false,
-      "on": [
-        {
-          "events": "@legendSymbol:click, @legendLabel:click",
-          "update": "event.shiftKey",
-          "force": true
-        }
-      ]
-    },
-    {
-      "name": "clicked",
-      "value": null,
-      "on": [
-        {
-          "events": "@legendSymbol:click, @legendLabel:click",
-          "update": "{value: datum.value}",
-          "force": true
-        }
-      ]
-    },
-    {
-      "name": "brush",
-      "value": 0,
-      "on": [
-        {
-          "events": { "signal": "clear" },
-          "update": "clear ? [0, 0] : brush"
-        },
-        {
-          "events": "@xaxis:pointerdown",
-          "update": "[x(), x()]"
-        },
-        {
-          "events": "[@xaxis:pointerdown, window:pointerup] > window:pointermove!",
-          "update": "[brush[0], clamp(x(), 0, width)]"
-        },
-        {
-          "events": { "signal": "delta" },
-          "update": "clampRange([anchor[0] + delta, anchor[1] + delta], 0, width)"
-        }
-      ]
-    },
-    {
-      "name": "anchor",
-      "value": null,
-      "on": [{ "events": "@brush:pointerdown", "update": "slice(brush)" }]
-    },
-    {
-      "name": "xdown",
-      "value": 0,
-      "on": [{ "events": "@brush:pointerdown", "update": "x()" }]
-    },
-    {
-      "name": "delta",
-      "value": 0,
-      "on": [
-        {
-          "events": "[@brush:pointerdown, window:pointerup] > window:pointermove!",
-          "update": "x() - xdown"
-        }
-      ]
-    },
-    {
-      "name": "domain",
-      "on": [
-        {
-          "events": { "signal": "brush" },
-          "update": "span(brush) ? invert('x', brush) : null"
-        }
-      ]
     }
   ],
 
@@ -294,15 +210,6 @@
           "as": ["total_fee_cleaned"]
         }
       ]
-    },
-    {
-      "name": "selected",
-      "on": [
-        { "trigger": "clear", "remove": true },
-        { "trigger": "!shift", "remove": true },
-        { "trigger": "!shift && clicked", "insert": "clicked" },
-        { "trigger": "shift && clicked", "toggle": "clicked" }
-      ]
     }
   ],
 
@@ -372,14 +279,14 @@
       "encode": {
         "title": {
           "update": {
-            "fontSize": { "value": 14 }
+            "fontSize": {"value": 14}
           }
         },
         "labels": {
           "interactive": false,
           "update": {
-            "fontSize": { "value": 12 },
-            "fill": { "value": "black" }
+            "fontSize": {"value": 12},
+            "fill": {"value": "black"}
           }
         }
       }
