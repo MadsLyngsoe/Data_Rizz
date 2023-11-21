@@ -401,7 +401,7 @@
           "opacity": [
             {
               "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
-              "value": 0.7
+              "value": 0.01
             },
             { "value": 0.15 }
           ],
@@ -411,7 +411,7 @@
               "scale": "color",
               "field": "Origin"
             },
-            { "value": "#ccc" }
+            { "value": "#33a02c" }
           ],
           "fill": { "value": "transparent" }
         }
@@ -442,7 +442,7 @@
               "scale": "color",
               "field": "Origin"
             },
-            { "value": "#ccc" }
+            { "value": "#33a02c" }
           ],
           "fill": { "value": "#33a02c" }
         }
