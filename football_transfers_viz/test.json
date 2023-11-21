@@ -10,6 +10,39 @@
       "name": "year",
       "value": "2000",
       "bind": { "input": "range", "min": 1992, "max": 2023, "step": 1 }
+    },
+    {
+      "name": "clear",
+      "value": true,
+      "on": [
+        {
+          "events": "pointerup[!event.item]",
+          "update": "true",
+          "force": true
+        }
+      ]
+    },
+    {
+      "name": "shift",
+      "value": false,
+      "on": [
+        {
+          "events": "@legendSymbol:click, @legendLabel:click",
+          "update": "event.shiftKey",
+          "force": true
+        }
+      ]
+    },
+    {
+      "name": "clicked",
+      "value": null,
+      "on": [
+        {
+          "events": "@legendSymbol:click, @legendLabel:click",
+          "update": "{value: datum.value}",
+          "force": true
+        }
+      ]
     }
   ],
 
@@ -44,6 +77,16 @@
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
         }
+      ]
+    },
+
+    {
+      "name": "selected",
+      "on": [
+        { "trigger": "clear", "remove": true },
+        { "trigger": "!shift", "remove": true },
+        { "trigger": "!shift && clicked", "insert": "clicked" },
+        { "trigger": "shift && clicked", "toggle": "clicked" }
       ]
     },
 
@@ -274,19 +317,36 @@
 
   "legends": [
     {
-      "fill": "color",
-      "orient": "left",
+      "stroke": "color",
+      "title": "Origin",
       "encode": {
-        "title": {
+        "symbols": {
+          "name": "legendSymbol",
+          "interactive": true,
           "update": {
-            "fontSize": {"value": 14}
+            "fill": { "value": "transparent" },
+            "strokeWidth": { "value": 2 },
+            "opacity": [
+              {
+                "test": "!length(data('selected')) || indata('selected', 'value', datum.value)",
+                "value": 0.7
+              },
+              { "value": 0.15 }
+            ],
+            "size": { "value": 64 }
           }
         },
         "labels": {
-          "interactive": false,
+          "name": "legendLabel",
+          "interactive": true,
           "update": {
-            "fontSize": {"value": 12},
-            "fill": {"value": "black"}
+            "opacity": [
+              {
+                "test": "!length(data('selected')) || indata('selected', 'value', datum.value)",
+                "value": 1
+              },
+              { "value": 0.25 }
+            ]
           }
         }
       }
