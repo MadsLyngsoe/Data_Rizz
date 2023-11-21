@@ -41,17 +41,7 @@
   ],
   "signals": [
     { "name": "cx", "update": "width / 2" },
-    { "name": "cy", "update": "height / 2" },
-    {
-      "name": "gravityX",
-      "value": 0.2,
-      "bind": { "input": "range", "min": 0, "max": 1 }
-    },
-    {
-      "name": "gravityY",
-      "value": 0.1,
-      "bind": { "input": "range", "min": 0, "max": 1 }
-    }
+    { "name": "cy", "update": "height / 2" }
   ],
 
   "scales": [
@@ -107,12 +97,12 @@
             {
               "force": "x",
               "x": "xfocus",
-              "strength": { "signal": "gravityX" }
+              "strength": 0.2
             },
             {
               "force": "y",
               "y": "yfocus",
-              "strength": { "signal": "gravityY" }
+              "strength": 0.1
             }
           ]
         }
