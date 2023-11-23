@@ -15,25 +15,16 @@
     {
       "name": "1-bundesliga",
       "url": "/data/1-bundesliga.csv",
-      "format": { "type": "csv" },
+      "format": {"type": "csv", "delimiter": ","},
       "transform": [
-        {
-          "type": "filter",
-          "expr": "datum.fee_cleaned > 0"
-        },
-        {
-          "type": "filter",
-          "expr": "datum.transfer_movement === 'in'"
-        },
+        {"type": "filter", "expr": "datum.fee_cleaned > 0"},
+        {"type": "filter", "expr": "datum.transfer_movement === 'in'"},
         {
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
         },
-        {
-          "type": "filter",
-          "expr": "datum.year_numeric <= year"
-        },
+        {"type": "filter", "expr": "datum.year_numeric <= year"},
         {
           "type": "formula",
           "as": "fee_numeric",
@@ -48,29 +39,19 @@
         }
       ]
     },
-
     {
       "name": "liga-nos",
       "url": "/data/liga-nos.csv",
-      "format": { "type": "csv" },
+      "format": {"type": "csv", "delimiter": ","},
       "transform": [
-        {
-          "type": "filter",
-          "expr": "datum.fee_cleaned > 0"
-        },
-        {
-          "type": "filter",
-          "expr": "datum.transfer_movement === 'in'"
-        },
+        {"type": "filter", "expr": "datum.fee_cleaned > 0"},
+        {"type": "filter", "expr": "datum.transfer_movement === 'in'"},
         {
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
         },
-        {
-          "type": "filter",
-          "expr": "datum.year_numeric <= year"
-        },
+        {"type": "filter", "expr": "datum.year_numeric <= year"},
         {
           "type": "formula",
           "as": "fee_numeric",
@@ -85,29 +66,19 @@
         }
       ]
     },
-
     {
       "name": "ligue-1",
       "url": "/data/ligue-1.csv",
-      "format": { "type": "csv" },
+      "format": {"type": "csv", "delimiter": ","},
       "transform": [
-        {
-          "type": "filter",
-          "expr": "datum.fee_cleaned > 0"
-        },
-        {
-          "type": "filter",
-          "expr": "datum.transfer_movement === 'in'"
-        },
+        {"type": "filter", "expr": "datum.fee_cleaned > 0"},
+        {"type": "filter", "expr": "datum.transfer_movement === 'in'"},
         {
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
         },
-        {
-          "type": "filter",
-          "expr": "datum.year_numeric <= year"
-        },
+        {"type": "filter", "expr": "datum.year_numeric <= year"},
         {
           "type": "formula",
           "as": "fee_numeric",
@@ -122,29 +93,19 @@
         }
       ]
     },
-
     {
       "name": "premier-league",
       "url": "/data/premier-league.csv",
-      "format": { "type": "csv" },
+      "format": {"type": "csv", "delimiter": ","},
       "transform": [
-        {
-          "type": "filter",
-          "expr": "datum.fee_cleaned > 0"
-        },
-        {
-          "type": "filter",
-          "expr": "datum.transfer_movement === 'in'"
-        },
+        {"type": "filter", "expr": "datum.fee_cleaned > 0"},
+        {"type": "filter", "expr": "datum.transfer_movement === 'in'"},
         {
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
         },
-        {
-          "type": "filter",
-          "expr": "datum.year_numeric <= year"
-        },
+        {"type": "filter", "expr": "datum.year_numeric <= year"},
         {
           "type": "formula",
           "as": "fee_numeric",
@@ -159,29 +120,19 @@
         }
       ]
     },
-
     {
       "name": "primera-division",
       "url": "/data/primera-division.csv",
-      "format": { "type": "csv" },
+      "format": {"type": "csv", "delimiter": ","},
       "transform": [
-        {
-          "type": "filter",
-          "expr": "datum.fee_cleaned > 0"
-        },
-        {
-          "type": "filter",
-          "expr": "datum.transfer_movement === 'in'"
-        },
+        {"type": "filter", "expr": "datum.fee_cleaned > 0"},
+        {"type": "filter", "expr": "datum.transfer_movement === 'in'"},
         {
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
         },
-        {
-          "type": "filter",
-          "expr": "datum.year_numeric <= year"
-        },
+        {"type": "filter", "expr": "datum.year_numeric <= year"},
         {
           "type": "formula",
           "as": "fee_numeric",
@@ -196,29 +147,19 @@
         }
       ]
     },
-
     {
       "name": "serie-a",
       "url": "/data/serie-a.csv",
-      "format": { "type": "csv" },
+      "format": {"type": "csv", "delimiter": ","},
       "transform": [
-        {
-          "type": "filter",
-          "expr": "datum.fee_cleaned > 0"
-        },
-        {
-          "type": "filter",
-          "expr": "datum.transfer_movement === 'in'"
-        },
+        {"type": "filter", "expr": "datum.fee_cleaned > 0"},
+        {"type": "filter", "expr": "datum.transfer_movement === 'in'"},
         {
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
         },
-        {
-          "type": "filter",
-          "expr": "datum.year_numeric <= year"
-        },
+        {"type": "filter", "expr": "datum.year_numeric <= year"},
         {
           "type": "formula",
           "as": "fee_numeric",
@@ -233,10 +174,16 @@
         }
       ]
     },
-
     {
-      "name": "nested",
-      "source": ["1-bundesliga", "liga-nos", "ligue-1", "premier-league", "primera-division", "serie-a"],
+      "name": "treeData",
+      "source": [
+        "1-bundesliga",
+        "liga-nos",
+        "ligue-1",
+        "premier-league",
+        "primera-division",
+        "serie-a"
+      ],
       "transform": [
         {
           "type": "nest",
@@ -255,24 +202,30 @@
     },
     {
       "name": "nodes",
-      "source": "nested",
-      "transform": [{"type": "filter", "expr": "datum.children"}]
+      "source": "treeData",
+      "transform": [
+        {"type": "filter", "expr": "datum.children"}
+        ]
     },
     {
       "name": "leaves",
-      "source": "nested",
+      "source": "treeData",
       "transform": [{"type": "filter", "expr": "!datum.children"}]
     }
   ],
   "scales": [
-    {"name": "color", "type": "ordinal", "range": [
-      "#a6cee3",
-      "#33a02c",
-      "#fb9a99",
-      "#e31a1c",
-      "#ff7f00",
-      "#cab2d6"
-    ]},
+    {
+      "name": "color",
+      "type": "ordinal",
+      "range": [
+        "#a6cee3",
+        "#33a02c",
+        "#fb9a99",
+        "#e31a1c",
+        "#ff7f00",
+        "#cab2d6"
+      ]
+    },
     {
       "name": "size",
       "type": "ordinal",
@@ -286,7 +239,6 @@
       "range": [0.15, 0.5, 0.8, 1]
     }
   ],
-
   "legends": [
     {
       "stroke": "color",
@@ -294,15 +246,11 @@
       "padding": 4,
       "encode": {
         "symbols": {
-          "enter": {
-            "strokeWidth": {"value": 2},
-            "size": {"value": 50}
-          }
+          "enter": {"strokeWidth": {"value": 2}, "size": {"value": 50}}
         }
       }
     }
   ],
-  
   "marks": [
     {
       "type": "rect",
@@ -329,10 +277,7 @@
           "y2": {"field": "y1"},
           "fill": {"scale": "color", "field": "league_name"}
         },
-        "hover": {
-          "fill": {"value": "white"},
-          "tooltip": {"signal": "datum"}
-        }
+        "hover": {"fill": {"value": "white"}, "tooltip": {"signal": "datum"}}
       }
     },
     {
@@ -355,4 +300,4 @@
       }
     }
   ]
-}
+} 
