@@ -294,7 +294,12 @@
       "round": true,
       "nice": true,
       "zero": true,
-      "domain": { "data": "premier-league", "field": "total_fee_cleaned" },
+      "domain": {
+        "fields": [
+          { "data": "premier-league", "field": "total_fee_cleaned" },
+          { "data": "serie-a", "field": "total_fee_cleaned" }
+        ]
+      },
       "range": "height"
     },
     {
