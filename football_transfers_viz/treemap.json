@@ -330,7 +330,7 @@
           "fill": {"scale": "color", "field": "league_name"}
         },
         "hover": {
-          "fill": {"value": "red"},
+          "fill": {"value": "white"},
           "tooltip": {"signal": "datum"}
         }
       }
