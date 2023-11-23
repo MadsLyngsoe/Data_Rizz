@@ -57,6 +57,10 @@
           "expr": "datum.fee_cleaned > 0"
         },
         {
+          "type": "filter",
+          "expr": "datum.transfer_movement === 'in'"
+        },
+        {
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
@@ -100,6 +104,10 @@
           "expr": "datum.fee_cleaned > 0"
         },
         {
+          "type": "filter",
+          "expr": "datum.transfer_movement === 'in'"
+        },
+        {
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
@@ -131,6 +139,10 @@
         {
           "type": "filter",
           "expr": "datum.fee_cleaned > 0"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.transfer_movement === 'in'"
         },
         {
           "type": "formula",
@@ -166,6 +178,10 @@
           "expr": "datum.fee_cleaned > 0"
         },
         {
+          "type": "filter",
+          "expr": "datum.transfer_movement === 'in'"
+        },
+        {
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
@@ -199,6 +215,10 @@
           "expr": "datum.fee_cleaned > 0"
         },
         {
+          "type": "filter",
+          "expr": "datum.transfer_movement === 'in'"
+        },
+        {
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
@@ -230,6 +250,10 @@
         {
           "type": "filter",
           "expr": "datum.fee_cleaned > 0"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.transfer_movement === 'in'"
         },
         {
           "type": "formula",
