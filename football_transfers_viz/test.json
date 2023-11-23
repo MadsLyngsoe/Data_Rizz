@@ -413,7 +413,7 @@
       "encode": {
         "update": {
           "tooltip": {
-            "signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Bundesliga'}"
+            "signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Bundesliga', 'Year': datum.year_numeric}"
           },
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
@@ -460,7 +460,7 @@
       "encode": {
         "update": {
           "tooltip": {
-            "signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Liga Nos'}"
+            "signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Liga Nos', 'Year': datum.year_numeric}"
           },
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
@@ -521,7 +521,7 @@
       "encode": {
         "update": {
           "tooltip": {
-            "signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Ligue 1'}"
+            "signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Ligue 1', 'Year': datum.year_numeric}"
           },
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
@@ -568,7 +568,7 @@
       "encode": {
         "update": {
           "tooltip": {
-            "signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Premier League'}"
+            "signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Premier League', 'Year': datum.year_numeric}"
           },
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
@@ -615,7 +615,7 @@
       "encode": {
         "update": {
           "tooltip": {
-            "signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'La Liga'}"
+            "signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'La Liga', 'Year': datum.year_numeric}"
           },
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
@@ -662,7 +662,7 @@
       "encode": {
         "update": {
           "tooltip": {
-            "signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Serie A'}"
+            "signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Serie A', 'Year': datum.year_numeric}"
           },
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
