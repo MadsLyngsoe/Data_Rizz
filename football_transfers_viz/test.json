@@ -49,7 +49,7 @@
   "data": [
     {
       "name": "1-bundesliga",
-      "url": "data/1-bundesliga.csv",
+      "url": "/data/1-bundesliga.csv",
       "format": { "type": "csv" },
       "transform": [
         {
@@ -364,8 +364,21 @@
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
-          "opacity": { "value": 0.5 },
-          "stroke": { "value": "#a6cee3" },
+          "opacity": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
+              "value": 0.01
+            },
+            { "value": 0.15 }
+          ],
+          "stroke": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
+              "scale": "color",
+              "field": "Origin"
+            },
+            { "value": "#a6cee3" }
+          ],
           "fill": { "value": "transparent" }
         }
       }
@@ -459,8 +472,21 @@
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
-          "opacity": { "value": 0.5 },
-          "stroke": { "value": "#fb9a99" },
+          "opacity": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
+              "value": 0.01
+            },
+            { "value": 0.15 }
+          ],
+          "stroke": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
+              "scale": "color",
+              "field": "Origin"
+            },
+            { "value": "#fb9a99" }
+          ],
           "fill": { "value": "transparent" }
         }
       }
@@ -493,8 +519,21 @@
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
-          "opacity": { "value": 0.5 },
-          "stroke": { "value": "#e31a1c" },
+          "opacity": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
+              "value": 0.01
+            },
+            { "value": 0.15 }
+          ],
+          "stroke": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
+              "scale": "color",
+              "field": "Origin"
+            },
+            { "value": "#e31a1c" }
+          ],
           "fill": { "value": "transparent" }
         }
       }
@@ -527,8 +566,21 @@
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
-          "opacity": { "value": 0.5 },
-          "stroke": { "value": "#ff7f00" },
+          "opacity": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
+              "value": 0.01
+            },
+            { "value": 0.15 }
+          ],
+          "stroke": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
+              "scale": "color",
+              "field": "Origin"
+            },
+            { "value": "#ff7f00" }
+          ],
           "fill": { "value": "transparent" }
         }
       }
@@ -561,8 +613,21 @@
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
-          "opacity": { "value": 0.5 },
-          "stroke": { "value": "#cab2d6" },
+          "opacity": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
+              "value": 0.01
+            },
+            { "value": 0.15 }
+          ],
+          "stroke": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
+              "scale": "color",
+              "field": "Origin"
+            },
+            { "value": "#cab2d6" }
+          ],
           "fill": { "value": "transparent" }
         }
       }
