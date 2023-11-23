@@ -162,7 +162,10 @@
           "y2": {"field": "y1"},
           "fill": {"scale": "color", "field": "league_name"}
         },
-        "hover": {"fill": {"value": "red"}}
+        "hover": {
+          "fill": {"value": "red"},
+          "tooltip": {"signal": "datum"}
+        }
       }
     },
     {
