@@ -1,0 +1,188 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "A basic scatter plot example depicting automobile statistics.",
+  "width": 300,
+  "height": 300,
+  "padding": 5,
+  "signals": [
+    {
+      "name": "year",
+      "value": "1992",
+      "bind": {"input": "range", "min": 1992, "max": 2023, "step": 1}
+    }
+  ],
+  "data": [
+    {
+      "name": "1-bundesliga",
+      "url": "/data/1-bundesliga.csv",
+      "format": {"type": "csv", "delimiter": ","},
+      "transform": [
+        {"type": "filter", "expr": "datum.fee_cleaned > 0"},
+        {
+          "type": "formula",
+          "as": "year_numeric",
+          "expr": "toNumber(datum.year)"
+        },
+        {
+          "type": "formula",
+          "as": "fee_numeric",
+          "expr": "format(datum.fee_cleaned, ',.0f')"
+        },
+        {"type": "filter", "expr": "datum.year_numeric <= year"},
+        {
+          "type": "aggregate",
+          "groupby": ["club_name", "league_name"],
+          "fields": ["fee_numeric"],
+          "ops": ["sum"],
+          "as": ["total_fee_cleaned"]
+        }
+      ]
+    },
+    {
+      "name": "liga-nos",
+      "url": "/data/liga-nos.csv",
+      "format": {"type": "csv", "delimiter": ","},
+      "transform": [
+        {"type": "filter", "expr": "datum.fee_cleaned > 0"},
+        {
+          "type": "formula",
+          "as": "year_numeric",
+          "expr": "toNumber(datum.year)"
+        },
+        {"type": "filter", "expr": "datum.year_numeric <= year"},
+        {
+          "type": "formula",
+          "as": "fee_numeric",
+          "expr": "format(datum.fee_cleaned, ',.0f')"
+        },
+        {
+          "type": "aggregate",
+          "groupby": ["club_name", "league_name"],
+          "fields": ["fee_numeric"],
+          "ops": ["sum"],
+          "as": ["total_fee_cleaned"]
+        }
+      ]
+    },
+    {
+      "name": "championship",
+      "url": "/data/championship.csv",
+      "format": {"type": "csv", "delimiter": ","},
+      "transform": [
+        {"type": "filter", "expr": "datum.fee_cleaned > 0"},
+        {
+          "type": "formula",
+          "as": "year_numeric",
+          "expr": "toNumber(datum.year)"
+        },
+        {"type": "filter", "expr": "datum.year_numeric <= year"},
+        {
+          "type": "formula",
+          "as": "fee_numeric",
+          "expr": "format(datum.fee_cleaned, ',.0f')"
+        },
+        {
+          "type": "aggregate",
+          "groupby": ["club_name", "league_name"],
+          "fields": ["fee_numeric"],
+          "ops": ["sum"],
+          "as": ["total_fee_cleaned"]
+        }
+      ]
+    },
+
+    {
+      "name": "nested",
+      "source": ["1-bundesliga", "liga-nos", "championship"],
+      "transform": [
+        {
+          "type": "nest",
+          "keys": ["league_name"],
+          "generate": {"signal": "true"}
+        },
+        {
+          "type": "treemap",
+          "round": true,
+          "field": "total_fee_cleaned",
+          "sort": {"field": "total_fee_cleaned"},
+          "method": "binary",
+          "size": [{"signal": "width"}, {"signal": "height"}]
+        }
+      ]
+    },
+    {
+      "name": "nodes",
+      "source": "nested",
+      "transform": [{"type": "filter", "expr": "datum.children"}]
+    },
+    {
+      "name": "leaves",
+      "source": "nested",
+      "transform": [{"type": "filter", "expr": "!datum.children"}]
+    }
+  ],
+  "scales": [
+    {"name": "color", "type": "ordinal", "range": ["green", "blue", "purple"]},
+    {
+      "name": "size",
+      "type": "ordinal",
+      "domain": [0, 1, 2, 3],
+      "range": [256, 28, 20, 14]
+    },
+    {
+      "name": "opacity",
+      "type": "ordinal",
+      "domain": [0, 1, 2, 3],
+      "range": [0.15, 0.5, 0.8, 1]
+    }
+  ],
+  "marks": [
+    {
+      "type": "rect",
+      "from": {"data": "nodes"},
+      "interactive": false,
+      "encode": {
+        "update": {
+          "x": {"field": "x0"},
+          "y": {"field": "y0"},
+          "x2": {"field": "x1"},
+          "y2": {"field": "y1"}
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "from": {"data": "leaves"},
+      "encode": {
+        "enter": {"stroke": {"value": "white"}},
+        "update": {
+          "x": {"field": "x0"},
+          "y": {"field": "y0"},
+          "x2": {"field": "x1"},
+          "y2": {"field": "y1"},
+          "fill": {"scale": "color", "field": "league_name"}
+        },
+        "hover": {"fill": {"value": "red"}}
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "leaves"},
+      "interactive": false,
+      "encode": {
+        "enter": {
+          "font": {"value": "Helvetica Neue, Arial"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"},
+          "fill": {"value": "black"},
+          "fontSize": {"scale": "size", "field": "depth"},
+          "fillOpacity": {"scale": "opacity", "field": "depth"}
+        },
+        "update": {
+          "x": {"signal": "0.5 * (datum.x0 + datum.x1)"},
+          "y": {"signal": "0.5 * (datum.y0 + datum.y1)"}
+        }
+      }
+    }
+  ]
+}
