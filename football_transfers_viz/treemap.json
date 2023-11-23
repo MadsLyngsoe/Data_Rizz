@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "A basic scatter plot example depicting automobile statistics.",
-  "width": 300,
-  "height": 300,
+  "width": 600,
+  "height": 600,
   "padding": 5,
   "signals": [
     {
@@ -15,20 +15,30 @@
     {
       "name": "1-bundesliga",
       "url": "/data/1-bundesliga.csv",
-      "format": {"type": "csv", "delimiter": ","},
+      "format": { "type": "csv" },
       "transform": [
-        {"type": "filter", "expr": "datum.fee_cleaned > 0"},
+        {
+          "type": "filter",
+          "expr": "datum.fee_cleaned > 0"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.transfer_movement === 'in'"
+        },
         {
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
         },
         {
+          "type": "filter",
+          "expr": "datum.year_numeric <= year"
+        },
+        {
           "type": "formula",
           "as": "fee_numeric",
           "expr": "format(datum.fee_cleaned, ',.0f')"
         },
-        {"type": "filter", "expr": "datum.year_numeric <= year"},
         {
           "type": "aggregate",
           "groupby": ["club_name", "league_name"],
@@ -38,18 +48,29 @@
         }
       ]
     },
+
     {
       "name": "liga-nos",
       "url": "/data/liga-nos.csv",
-      "format": {"type": "csv", "delimiter": ","},
+      "format": { "type": "csv" },
       "transform": [
-        {"type": "filter", "expr": "datum.fee_cleaned > 0"},
+        {
+          "type": "filter",
+          "expr": "datum.fee_cleaned > 0"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.transfer_movement === 'in'"
+        },
         {
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
         },
-        {"type": "filter", "expr": "datum.year_numeric <= year"},
+        {
+          "type": "filter",
+          "expr": "datum.year_numeric <= year"
+        },
         {
           "type": "formula",
           "as": "fee_numeric",
@@ -64,18 +85,140 @@
         }
       ]
     },
+
     {
-      "name": "championship",
-      "url": "/data/championship.csv",
-      "format": {"type": "csv", "delimiter": ","},
+      "name": "ligue-1",
+      "url": "/data/ligue-1.csv",
+      "format": { "type": "csv" },
       "transform": [
-        {"type": "filter", "expr": "datum.fee_cleaned > 0"},
+        {
+          "type": "filter",
+          "expr": "datum.fee_cleaned > 0"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.transfer_movement === 'in'"
+        },
         {
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
         },
-        {"type": "filter", "expr": "datum.year_numeric <= year"},
+        {
+          "type": "filter",
+          "expr": "datum.year_numeric <= year"
+        },
+        {
+          "type": "formula",
+          "as": "fee_numeric",
+          "expr": "format(datum.fee_cleaned, ',.0f')"
+        },
+        {
+          "type": "aggregate",
+          "groupby": ["club_name", "league_name"],
+          "fields": ["fee_numeric"],
+          "ops": ["sum"],
+          "as": ["total_fee_cleaned"]
+        }
+      ]
+    },
+
+    {
+      "name": "premier-league",
+      "url": "/data/premier-league.csv",
+      "format": { "type": "csv" },
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.fee_cleaned > 0"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.transfer_movement === 'in'"
+        },
+        {
+          "type": "formula",
+          "as": "year_numeric",
+          "expr": "toNumber(datum.year)"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.year_numeric <= year"
+        },
+        {
+          "type": "formula",
+          "as": "fee_numeric",
+          "expr": "format(datum.fee_cleaned, ',.0f')"
+        },
+        {
+          "type": "aggregate",
+          "groupby": ["club_name", "league_name"],
+          "fields": ["fee_numeric"],
+          "ops": ["sum"],
+          "as": ["total_fee_cleaned"]
+        }
+      ]
+    },
+
+    {
+      "name": "primera-division",
+      "url": "/data/primera-division.csv",
+      "format": { "type": "csv" },
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.fee_cleaned > 0"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.transfer_movement === 'in'"
+        },
+        {
+          "type": "formula",
+          "as": "year_numeric",
+          "expr": "toNumber(datum.year)"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.year_numeric <= year"
+        },
+        {
+          "type": "formula",
+          "as": "fee_numeric",
+          "expr": "format(datum.fee_cleaned, ',.0f')"
+        },
+        {
+          "type": "aggregate",
+          "groupby": ["club_name", "league_name"],
+          "fields": ["fee_numeric"],
+          "ops": ["sum"],
+          "as": ["total_fee_cleaned"]
+        }
+      ]
+    },
+
+    {
+      "name": "serie-a",
+      "url": "/data/serie-a.csv",
+      "format": { "type": "csv" },
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.fee_cleaned > 0"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.transfer_movement === 'in'"
+        },
+        {
+          "type": "formula",
+          "as": "year_numeric",
+          "expr": "toNumber(datum.year)"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.year_numeric <= year"
+        },
         {
           "type": "formula",
           "as": "fee_numeric",
@@ -93,7 +236,7 @@
 
     {
       "name": "nested",
-      "source": ["1-bundesliga", "liga-nos", "championship"],
+      "source": ["1-bundesliga", "liga-nos", "ligue-1", "premier-league", "primera-division", "serie-a"],
       "transform": [
         {
           "type": "nest",
@@ -122,7 +265,14 @@
     }
   ],
   "scales": [
-    {"name": "color", "type": "ordinal", "range": ["green", "blue", "purple"]},
+    {"name": "color", "type": "ordinal", "range": [
+      "#a6cee3",
+      "#33a02c",
+      "#fb9a99",
+      "#e31a1c",
+      "#ff7f00",
+      "#cab2d6"
+    ]},
     {
       "name": "size",
       "type": "ordinal",
@@ -136,6 +286,23 @@
       "range": [0.15, 0.5, 0.8, 1]
     }
   ],
+
+  "legends": [
+    {
+      "stroke": "color",
+      "title": "League name",
+      "padding": 4,
+      "encode": {
+        "symbols": {
+          "enter": {
+            "strokeWidth": {"value": 2},
+            "size": {"value": 50}
+          }
+        }
+      }
+    }
+  ],
+  
   "marks": [
     {
       "type": "rect",
