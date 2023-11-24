@@ -7,10 +7,14 @@
 
   "signals": [
     {
-      "name": "year",
-      "value": "2000",
-      "bind": { "input": "range", "min": 1992, "max": 2023, "step": 1 }
+      "name": "yearMin",
+      "value": "1992"
     },
+    {
+      "name": "yearMax",
+      "value": "2023"
+    },
+  
     {
       "name": "clear",
       "value": true,
@@ -67,7 +71,11 @@
         },
         {
           "type": "filter",
-          "expr": "datum.year_numeric <= year"
+          "expr": "datum.year_numeric <= yearMax"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.year_numeric >= yearMin"
         },
         {
           "type": "formula",
@@ -114,7 +122,11 @@
         },
         {
           "type": "filter",
-          "expr": "datum.year_numeric <= year"
+          "expr": "datum.year_numeric <= yearMax"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.year_numeric >= yearMin"
         },
         {
           "type": "formula",
@@ -151,7 +163,11 @@
         },
         {
           "type": "filter",
-          "expr": "datum.year_numeric <= year"
+          "expr": "datum.year_numeric <= yearMax"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.year_numeric >= yearMin"
         },
         {
           "type": "formula",
@@ -188,7 +204,11 @@
         },
         {
           "type": "filter",
-          "expr": "datum.year_numeric <= year"
+          "expr": "datum.year_numeric <= yearMax"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.year_numeric >= yearMin"
         },
         {
           "type": "formula",
@@ -225,7 +245,11 @@
         },
         {
           "type": "filter",
-          "expr": "datum.year_numeric <= year"
+          "expr": "datum.year_numeric <= yearMax"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.year_numeric >= yearMin"
         },
         {
           "type": "formula",
@@ -262,7 +286,11 @@
         },
         {
           "type": "filter",
-          "expr": "datum.year_numeric <= year"
+          "expr": "datum.year_numeric <= yearMax"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.year_numeric >= yearMin"
         },
         {
           "type": "formula",

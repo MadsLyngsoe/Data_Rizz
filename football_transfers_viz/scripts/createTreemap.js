@@ -3,16 +3,24 @@ var spec;
 function createTreemap() {
     showTreemap = document.getElementById("flexCheckDefault").checked
     if(showTreemap === false) {
-        document.getElementsByClassName("row1")[0].innerHTML = "";
-        console.log(document.getElementsByClassName("row1")[0]);
+        document.getElementById("row1").innerHTML = "";
         return;
     }
-    console.log("hello");
     //vegaEmbed(divId, spec, {"actions": true});
-    document.getElementsByClassName("row1")[0].innerHTML += `
+    document.getElementById("row1").innerHTML += `
     <div class="col" id="col2-1">
               <script type="text/javascript">createChart("#col2-1", "treemap.json");</script>
     </div>
+    `
+    fetch("treemap.json")
+  .then((res) => res.json())
+  .then((data) => {
+    spec = data;
+    vegaEmbed("#col2-1", spec, {"actions": true});
+  });
+  /*
+  FOR SLIDER FOR TREEMAP
+  <div class="mx-auto" style="width: 20%;">
     <label for="customRange2" class="form-label">Select year</label>
     <input type="range" 
         class="form-range" 
@@ -22,11 +30,7 @@ function createTreemap() {
         onchange="createChart('#col2-1', 'treemap.json', this.value); this.nextElementSibling.value = 'Year: ' + this.value"
     >
     <output>Year: 1992</output>
-    `
-    fetch("treemap.json")
-  .then((res) => res.json())
-  .then((data) => {
-    spec = data;
-    vegaEmbed("#col2-1", spec, {"actions": true});
-  });
+    </div>
+    */
+
 }
