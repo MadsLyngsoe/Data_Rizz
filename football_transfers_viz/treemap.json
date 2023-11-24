@@ -7,8 +7,7 @@
   "signals": [
     {
       "name": "year",
-      "value": "1992",
-      "bind": {"input": "range", "min": 1992, "max": 2023, "step": 1}
+      "value": "1992"
     }
   ],
   "data": [
