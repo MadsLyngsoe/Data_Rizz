@@ -1,10 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "title": "Player Transfers compared",
-  "width": 500,
-  "height": 600,
-  "background": "grey",
-  "padding": { "top": 60, "bottom": 0 },
+  "width": 400,
+  "height": 650,
+  "background": "#e8e2e1",
+  "padding": { "top": 0, "bottom": 0 },
   "autosize": "none",
   "signals": [
     { "name": "cx", "update": "width / 2" },
