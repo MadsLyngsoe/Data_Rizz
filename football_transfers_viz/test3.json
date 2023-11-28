@@ -9,12 +9,13 @@
   "signals": [
     { "name": "cx", "update": "width / 2" },
     { "name": "cy", "update": "height / 2" },
-    { "name": "clubName", "value": ""}
+    { "name": "clubName", "value": "" },
+    { "name": "leagueName", "value": "" }
   ],
   "data": [
     {
-      "name": "1-bundesliga",
-      "url": "https://raw.githubusercontent.com/MadsLyngsoe/Data_Rizz/main/data/1-bundesliga.csv",
+      "name": "leagueData",
+      "url": "leagueName",
       "format": { "type": "csv" },
       "transform": [
         {
@@ -50,13 +51,13 @@
   "scales": [
     {
       "name": "size",
-      "domain": { "data": "1-bundesliga", "field": "fee_cleaned" },
+      "domain": { "data": "leagueData", "field": "fee_cleaned" },
       "range": [300, 800]
     },
     {
       "name": "color",
       "type": "ordinal",
-      "domain": { "data": "1-bundesliga", "field": "player_name" },
+      "domain": { "data": "leagueData", "field": "player_name" },
       "range": { "scheme": "category20" }
     }
   ],
@@ -64,7 +65,7 @@
     {
       "name": "nodes",
       "type": "symbol",
-      "from": { "data": "1-bundesliga" },
+      "from": { "data": "leagueData" },
       "encode": {
         "enter": {
           "fill": { "scale": "color", "field": "player_name" },
