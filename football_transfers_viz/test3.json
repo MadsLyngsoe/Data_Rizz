@@ -1,6 +1,12 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "title": "Player Transfers compared",
+  "title": {
+    "text": "lololol",
+    "color": "black",
+    "anchor": "start",
+    "offset": 10,
+    "fontSize": 60
+  },
   "width": 400,
   "height": 600,
   "background": "#e8e2e1",
@@ -75,7 +81,7 @@
           "stroke": { "value": "black" },
           "strokeWidth": { "value": 1 },
           "tooltip": {
-            "signal": "{'Player': datum.player_name, 'Age': datum.age, 'Transfer fee' : datum.fee, 'Bought/loaned from' : datum.club_involved_name}"
+            "signal": "{'Player': datum.player_name, 'Age': datum.age, 'Transfer fee' : datum.fee, 'Bought/loaned from' : datum.club_involved_name, 'Came to the club in' : datum.year_numeric}"
           }
         }
       },
