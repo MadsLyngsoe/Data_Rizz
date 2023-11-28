@@ -38,6 +38,14 @@
           "expr": "format(datum.fee_cleaned, ',.0f')"
         },
         {
+          "type": "filter",
+          "expr": "datum.transfer_movement === 'in'"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.fee_cleaned !== 'NA'"
+        },
+        {
           "type": "aggregate",
           "groupby": ["club_name", "league_name"],
           "fields": ["fee_numeric"],

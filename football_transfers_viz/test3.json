@@ -1,21 +1,20 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "title": "Player Transfers compared",
-  "width": 400,
-  "height": 500,
+  "width": 500,
+  "height": 600,
   "background": "grey",
   "padding": { "top": 60, "bottom": 0 },
   "autosize": "none",
   "signals": [
     { "name": "cx", "update": "width / 2" },
     { "name": "cy", "update": "height / 2" },
-    { "name": "clubName", "value": "" },
-    { "name": "leagueName", "value": "" }
+    { "name": "clubName", "value": "" }
   ],
   "data": [
     {
       "name": "leagueData",
-      "url": { "signal": "leagueName" },
+      "url": "/data/primera-division.csv",
       "format": { "type": "csv" },
       "transform": [
         {
@@ -26,10 +25,6 @@
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
-        },
-        {
-          "type": "filter",
-          "expr": "datum.year_numeric === 2020"
         },
         {
           "type": "formula",
