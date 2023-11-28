@@ -3,7 +3,7 @@
   "description": "A basic scatter plot example depicting automobile statistics.",
   "width": 600,
   "height": 600,
-  "padding": 5,
+  "padding": 0,
   "signals": [
     {
       "name": "yearMin",
@@ -18,16 +18,16 @@
     {
       "name": "1-bundesliga",
       "url": "/data/1-bundesliga.csv",
-      "format": {"type": "csv", "delimiter": ","},
+      "format": { "type": "csv", "delimiter": "," },
       "transform": [
-        {"type": "filter", "expr": "datum.fee_cleaned > 0"},
-        {"type": "filter", "expr": "datum.transfer_movement === 'in'"},
+        { "type": "filter", "expr": "datum.fee_cleaned > 0" },
+        { "type": "filter", "expr": "datum.transfer_movement === 'in'" },
         {
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
         },
-        {"type": "filter", "expr": "datum.year_numeric <= yearMax"},
+        { "type": "filter", "expr": "datum.year_numeric <= yearMax" },
         {
           "type": "filter",
           "expr": "datum.year_numeric >= yearMin"
@@ -57,16 +57,16 @@
     {
       "name": "liga-nos",
       "url": "/data/liga-nos.csv",
-      "format": {"type": "csv", "delimiter": ","},
+      "format": { "type": "csv", "delimiter": "," },
       "transform": [
-        {"type": "filter", "expr": "datum.fee_cleaned > 0"},
-        {"type": "filter", "expr": "datum.transfer_movement === 'in'"},
+        { "type": "filter", "expr": "datum.fee_cleaned > 0" },
+        { "type": "filter", "expr": "datum.transfer_movement === 'in'" },
         {
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
         },
-        {"type": "filter", "expr": "datum.year_numeric <= yearMax"},
+        { "type": "filter", "expr": "datum.year_numeric <= yearMax" },
         {
           "type": "filter",
           "expr": "datum.year_numeric >= yearMin"
@@ -88,16 +88,16 @@
     {
       "name": "ligue-1",
       "url": "/data/ligue-1.csv",
-      "format": {"type": "csv", "delimiter": ","},
+      "format": { "type": "csv", "delimiter": "," },
       "transform": [
-        {"type": "filter", "expr": "datum.fee_cleaned > 0"},
-        {"type": "filter", "expr": "datum.transfer_movement === 'in'"},
+        { "type": "filter", "expr": "datum.fee_cleaned > 0" },
+        { "type": "filter", "expr": "datum.transfer_movement === 'in'" },
         {
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
         },
-        {"type": "filter", "expr": "datum.year_numeric <= yearMax"},
+        { "type": "filter", "expr": "datum.year_numeric <= yearMax" },
         {
           "type": "filter",
           "expr": "datum.year_numeric >= yearMin"
@@ -119,16 +119,16 @@
     {
       "name": "premier-league",
       "url": "/data/premier-league.csv",
-      "format": {"type": "csv", "delimiter": ","},
+      "format": { "type": "csv", "delimiter": "," },
       "transform": [
-        {"type": "filter", "expr": "datum.fee_cleaned > 0"},
-        {"type": "filter", "expr": "datum.transfer_movement === 'in'"},
+        { "type": "filter", "expr": "datum.fee_cleaned > 0" },
+        { "type": "filter", "expr": "datum.transfer_movement === 'in'" },
         {
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
         },
-        {"type": "filter", "expr": "datum.year_numeric <= yearMax"},
+        { "type": "filter", "expr": "datum.year_numeric <= yearMax" },
         {
           "type": "filter",
           "expr": "datum.year_numeric >= yearMin"
@@ -150,16 +150,16 @@
     {
       "name": "primera-division",
       "url": "/data/primera-division.csv",
-      "format": {"type": "csv", "delimiter": ","},
+      "format": { "type": "csv", "delimiter": "," },
       "transform": [
-        {"type": "filter", "expr": "datum.fee_cleaned > 0"},
-        {"type": "filter", "expr": "datum.transfer_movement === 'in'"},
+        { "type": "filter", "expr": "datum.fee_cleaned > 0" },
+        { "type": "filter", "expr": "datum.transfer_movement === 'in'" },
         {
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
         },
-        {"type": "filter", "expr": "datum.year_numeric <= yearMax"},
+        { "type": "filter", "expr": "datum.year_numeric <= yearMax" },
         {
           "type": "filter",
           "expr": "datum.year_numeric >= yearMin"
@@ -181,16 +181,16 @@
     {
       "name": "serie-a",
       "url": "/data/serie-a.csv",
-      "format": {"type": "csv", "delimiter": ","},
+      "format": { "type": "csv", "delimiter": "," },
       "transform": [
-        {"type": "filter", "expr": "datum.fee_cleaned > 0"},
-        {"type": "filter", "expr": "datum.transfer_movement === 'in'"},
+        { "type": "filter", "expr": "datum.fee_cleaned > 0" },
+        { "type": "filter", "expr": "datum.transfer_movement === 'in'" },
         {
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
         },
-        {"type": "filter", "expr": "datum.year_numeric <= yearMax"},
+        { "type": "filter", "expr": "datum.year_numeric <= yearMax" },
         {
           "type": "filter",
           "expr": "datum.year_numeric >= yearMin"
@@ -223,29 +223,27 @@
         {
           "type": "nest",
           "keys": ["league_name"],
-          "generate": {"signal": "true"}
+          "generate": { "signal": "true" }
         },
         {
           "type": "treemap",
           "round": true,
           "field": "total_fee_cleaned",
-          "sort": {"field": "total_fee_cleaned"},
+          "sort": { "field": "total_fee_cleaned" },
           "method": "binary",
-          "size": [{"signal": "width"}, {"signal": "height"}]
+          "size": [{ "signal": "width" }, { "signal": "height" }]
         }
       ]
     },
     {
       "name": "nodes",
       "source": "treeData",
-      "transform": [
-        {"type": "filter", "expr": "datum.children"}
-        ]
+      "transform": [{ "type": "filter", "expr": "datum.children" }]
     },
     {
       "name": "leaves",
       "source": "treeData",
-      "transform": [{"type": "filter", "expr": "!datum.children"}]
+      "transform": [{ "type": "filter", "expr": "!datum.children" }]
     }
   ],
   "scales": [
@@ -281,7 +279,7 @@
       "padding": 4,
       "encode": {
         "symbols": {
-          "enter": {"strokeWidth": {"value": 2}, "size": {"value": 50}}
+          "enter": { "strokeWidth": { "value": 2 }, "size": { "value": 50 } }
         }
       }
     }
@@ -289,50 +287,55 @@
   "marks": [
     {
       "type": "rect",
-      "from": {"data": "nodes"},
+      "from": { "data": "nodes" },
       "interactive": false,
       "encode": {
         "update": {
-          "x": {"field": "x0"},
-          "y": {"field": "y0"},
-          "x2": {"field": "x1"},
-          "y2": {"field": "y1"}
+          "x": { "field": "x0" },
+          "y": { "field": "y0" },
+          "x2": { "field": "x1" },
+          "y2": { "field": "y1" }
         }
       }
     },
     {
       "type": "rect",
-      "from": {"data": "leaves"},
+      "from": { "data": "leaves" },
       "encode": {
-        "enter": {"stroke": {"value": "white"}},
+        "enter": { "stroke": { "value": "white" } },
         "update": {
-          "x": {"field": "x0"},
-          "y": {"field": "y0"},
-          "x2": {"field": "x1"},
-          "y2": {"field": "y1"},
-          "fill": {"scale": "color", "field": "league_name"}
+          "x": { "field": "x0" },
+          "y": { "field": "y0" },
+          "x2": { "field": "x1" },
+          "y2": { "field": "y1" },
+          "fill": { "scale": "color", "field": "league_name" }
         },
-        "hover": {"fill": {"value": "grey"}, "tooltip": {"signal": "datum"}}
+        "hover": {
+          "fill": { "value": "grey" },
+          "tooltip": {
+            "signal": "{'Club name': datum.club_name, 'Plays in': datum.league_name,'Total Money Spent' : datum.total_fee_cleaned + ' M €'}"
+          }
+        }
       }
     },
     {
       "type": "text",
-      "from": {"data": "leaves"},
+      "from": { "data": "leaves" },
       "interactive": false,
       "encode": {
         "enter": {
-          "font": {"value": "Helvetica Neue, Arial"},
-          "align": {"value": "center"},
-          "baseline": {"value": "middle"},
-          "fill": {"value": "black"},
-          "fontSize": {"scale": "size", "field": "depth"},
-          "fillOpacity": {"scale": "opacity", "field": "depth"}
+          "font": { "value": "Helvetica Neue, Arial" },
+          "align": { "value": "center" },
+          "baseline": { "value": "middle" },
+          "fill": { "value": "black" },
+          "fontSize": { "scale": "size", "field": "depth" },
+          "fillOpacity": { "scale": "opacity", "field": "depth" }
         },
         "update": {
-          "x": {"signal": "0.5 * (datum.x0 + datum.x1)"},
-          "y": {"signal": "0.5 * (datum.y0 + datum.y1)"}
+          "x": { "signal": "0.5 * (datum.x0 + datum.x1)" },
+          "y": { "signal": "0.5 * (datum.y0 + datum.y1)" }
         }
       }
     }
   ]
-} 
+}
