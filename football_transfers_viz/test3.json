@@ -15,7 +15,7 @@
   "data": [
     {
       "name": "leagueData",
-      "url": "leagueName",
+      "url": { "signal": "leagueName" },
       "format": { "type": "csv" },
       "transform": [
         {
