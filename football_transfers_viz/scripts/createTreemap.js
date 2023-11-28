@@ -1,21 +1,24 @@
 var spec;
 
-function createTreemap() {
+function createTreemap(year) {
     showTreemap = document.getElementById("flexCheckDefault").checked
     if(showTreemap === false) {
-        document.getElementById("row1").innerHTML = "";
+        //document.getElementById("row1").innerHTML = "";
         return;
     }
+    if(year === undefined) return;
+        var splittedYears = year?.split(",");
+        var yearMin = parseInt(splittedYears[0]);
+        var yearMax = parseInt(splittedYears[1]);
     //vegaEmbed(divId, spec, {"actions": true});
-    document.getElementById("row1").innerHTML += `
-    <div class="col" id="col2-1">
-              <script type="text/javascript">createChart("#col2-1", "treemap.json");</script>
-    </div>
-    `
     fetch("treemap.json")
   .then((res) => res.json())
   .then((data) => {
     spec = data;
+    if(yearMax !== undefined && yearMin !== undefined) {
+      spec.signals[0].value = yearMin;
+      spec.signals[1].value = yearMax;
+    }
     vegaEmbed("#col2-1", spec, {"actions": true});
   });
   /*

@@ -1,10 +1,13 @@
 var spec;
+var yearMin;
+var yearMax;
 
 function createChart(divId, chartSpec, year) {
-  if(year === undefined) return;
   var splittedYears = year?.split(",");
-  var yearMin = parseInt(splittedYears[0]);
-  var yearMax = parseInt(splittedYears[1]);
+  if(splittedYears !== undefined) {
+    var yearMin = parseInt(splittedYears[0]);
+    var yearMax = parseInt(splittedYears[1]);
+  }
 fetch(chartSpec)
   .then((res) => res.json())
   .then((data) => {
