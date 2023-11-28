@@ -6,6 +6,11 @@
   "background": "grey",
   "padding": { "top": 60, "bottom": 0 },
   "autosize": "none",
+  "signals": [
+    { "name": "cx", "update": "width / 2" },
+    { "name": "cy", "update": "height / 2" },
+    { "name": "clubName", "value": ""}
+  ],
   "data": [
     {
       "name": "1-bundesliga",
@@ -32,7 +37,7 @@
         },
         {
           "type": "filter",
-          "expr": "datum.club_name === 'Bayern Munich'"
+          "expr": "datum.club_name === clubName"
         },
         {
           "type": "filter",
@@ -40,10 +45,6 @@
         }
       ]
     }
-  ],
-  "signals": [
-    { "name": "cx", "update": "width / 2" },
-    { "name": "cy", "update": "height / 2" }
   ],
 
   "scales": [
