@@ -2,6 +2,7 @@
 var spec;
 var yearMin;
 var yearMax;
+var treeMapSelected;
 
 function createChart(divId, chartSpec, year) {
   var splittedYears = year?.split(",");
@@ -40,7 +41,14 @@ fetch(chartSpec)
     vegaEmbed(divId, spec, {"actions": true}
     ).then(result => {
         result.view.addEventListener('click', function(event, item) {
-          createBubbleChart("#col2-2", "test3.json", undefined, item.datum.club_name, item.datum.league_name);
+          if(item == null) return;
+          if(treeMapSelected == item) {
+            treeMapSelected = null;
+            document.getElementById("col2-2").innerHTML = "";
+          } else {
+            createBubbleChart("#col2-2", "test3.json", undefined, item.datum.club_name, item.datum.league_name);
+            treeMapSelected = item;
+          }
         });
     }).catch(console.warn);
   });
