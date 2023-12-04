@@ -3,6 +3,7 @@ var spec;
 var treeMapSelected;
 var lineChartView;
 var treemapChartView;
+var bubbleChartView;
 function createChart(divId, chartSpec) {
 fetch(chartSpec)
   .then((res) => res.json())
@@ -31,7 +32,7 @@ fetch(chartSpec)
             treeMapSelected = null;
             document.getElementById("col2-2").innerHTML = "";
           } else {
-            createBubbleChart("#col2-2", "test3.json", document.getElementById("slider").value, item.datum.club_name, item.datum.league_name);
+            createBubbleChart("#col2-2", "bubbleChart.json", document.getElementById("slider").value, item.datum.club_name, item.datum.league_name);
             treeMapSelected = item;
           }
         });
@@ -85,7 +86,10 @@ fetch(chartSpec)
         spec.data[0].url = "/data/serie-a.csv";
     }
     spec.signals[2].value = clubName;
-    vegaEmbed(divId, spec, {"actions": true});
+    vegaEmbed(divId, spec, {"actions": true}).then(result => {
+      bubbleChartView = result.view;
+    }
+    );
   });
 }
 
@@ -95,4 +99,8 @@ function getLineChartView() {
 
 function getTreemapChartView() {
   return treemapChartView;
+}
+
+function getBubbleChartView() {
+  return bubbleChartView;
 }
