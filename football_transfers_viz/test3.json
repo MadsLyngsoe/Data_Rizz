@@ -15,7 +15,9 @@
   "signals": [
     { "name": "cx", "update": "width / 2" },
     { "name": "cy", "update": "height / 2" },
-    { "name": "clubName", "value": "" }
+    { "name": "clubName", "value": "" },
+    { "name": "yearMin", "value": 1992 },
+    { "name": "yearMax", "value": 2021 }
   ],
   "data": [
     {
@@ -44,6 +46,14 @@
         {
           "type": "filter",
           "expr": "datum.transfer_movement === 'in'"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.year_numeric <= yearMax"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.year_numeric >= yearMin"
         }
       ]
     }

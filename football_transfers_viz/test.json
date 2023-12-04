@@ -4,7 +4,7 @@
   "width": 1000,
   "height": 300,
   "padding": 5,
-
+  "title": "Each league spending",
   "signals": [
     {
       "name": "yearMin",
@@ -311,9 +311,9 @@
   "scales": [
     {
       "name": "x",
-      "type": "band",
+      "type": "point",
       "round": true,
-      "domain": { "data": "serie-a", "field": "year_numeric" },
+      "domain": { "data": "serie-a", "field": "year_numeric" , "sort": true},
       "range": "width"
     },
     {
@@ -356,7 +356,7 @@
     {
       "scale": "x",
       "grid": true,
-      "domain": false,
+      "domain": true,
       "orient": "bottom",
       "tickCount": 10,
       "labelOverlap": "parity",

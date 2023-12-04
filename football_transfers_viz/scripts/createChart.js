@@ -1,43 +1,28 @@
 
 var spec;
-var yearMin;
-var yearMax;
 var treeMapSelected;
-
-function createChart(divId, chartSpec, year) {
-  var splittedYears = year?.split(",");
-  if(splittedYears !== undefined) {
-    var yearMin = parseInt(splittedYears[0]);
-    var yearMax = parseInt(splittedYears[1]);
-  }
+var lineChartView;
+var treemapChartView;
+function createChart(divId, chartSpec) {
 fetch(chartSpec)
   .then((res) => res.json())
   .then((data) => {
     spec = data;
-    if(yearMax !== undefined && yearMin !== undefined) {
-      spec.signals[0].value = yearMin;
-      spec.signals[1].value = yearMax;
-    }
     //vegaEmbed(divId, spec, {"actions": true});
-    vegaEmbed(divId, spec, {"actions": true});
+    vegaEmbed(divId, spec, {"actions": true}).then(result => {
+      lineChartView = result.view;
+    });
   });
   createTreemap("#col2-1", "treemap.json");
+  if(document.getElementById("col2-2") == undefined) return;
+  document.getElementById("col2-2").innerHTML = "";
 }
 
-function createTreemap(divId, chartSpec, year) {
-  var splittedYears = year?.split(",");
-  if(splittedYears !== undefined) {
-    var yearMin = parseInt(splittedYears[0]);
-    var yearMax = parseInt(splittedYears[1]);
-  }
+function createTreemap(divId, chartSpec) {
 fetch(chartSpec)
   .then((res) => res.json())
   .then((data) => {
     spec = data;
-    if(yearMax !== undefined && yearMin !== undefined) {
-      spec.signals[0].value = yearMin;
-      spec.signals[1].value = yearMax;
-    }
     vegaEmbed(divId, spec, {"actions": true}
     ).then(result => {
         result.view.addEventListener('click', function(event, item) {
@@ -46,10 +31,11 @@ fetch(chartSpec)
             treeMapSelected = null;
             document.getElementById("col2-2").innerHTML = "";
           } else {
-            createBubbleChart("#col2-2", "test3.json", undefined, item.datum.club_name, item.datum.league_name);
+            createBubbleChart("#col2-2", "test3.json", document.getElementById("slider").value, item.datum.club_name, item.datum.league_name);
             treeMapSelected = item;
           }
         });
+        treemapChartView = result.view;
     }).catch(console.warn);
   });
 }
@@ -67,8 +53,8 @@ fetch(chartSpec)
   .then((data) => {
     spec = data;
     if(yearMax !== undefined && yearMin !== undefined) {
-      spec.signals[0].value = yearMin;
-      spec.signals[1].value = yearMax;
+      spec.signals[3].value = yearMin;
+      spec.signals[4].value = yearMax;
     }
     switch(leagueName) {
       case "1 Bundesliga":
@@ -101,4 +87,12 @@ fetch(chartSpec)
     spec.signals[2].value = clubName;
     vegaEmbed(divId, spec, {"actions": true});
   });
+}
+
+function getLineChartView() {
+  return lineChartView;
+}
+
+function getTreemapChartView() {
+  return treemapChartView;
 }
