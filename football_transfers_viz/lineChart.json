@@ -423,17 +423,12 @@
           "strokeWidth": { "value": 2 },
           "opacity": [
             {
-              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
-              "value": 0.01
+              "test": "(!length(data('selected')) || indata('selected', 'value', 'Bundesliga'))",
+              "value": 1
             },
-            { "value": 0.15 }
+            { "value": 0 }
           ],
           "stroke": [
-            {
-              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
-              "scale": "color",
-              "field": "Origin"
-            },
             { "value": "#a6cee3" }
           ],
           "fill": { "value": "transparent" }
@@ -452,7 +447,21 @@
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
-          "stroke": { "value": "#a6cee3" },
+          "stroke": [
+            {
+              "test": "(!length(data('selected')))",
+              "scale": "color",
+              "field": "Origin"
+            },
+            { "value": "#a6cee3" }
+          ],
+          "opacity": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', 'Bundesliga'))",
+              "value": 1
+            },
+            { "value": 0 }
+          ],
           "fill": { "value": "#a6cee3" }
         }
       }
@@ -470,17 +479,12 @@
           "strokeWidth": { "value": 2 },
           "opacity": [
             {
-              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
-              "value": 0.01
+              "test": "(!length(data('selected')) || indata('selected', 'value', 'Liga Nos'))",
+              "value": 1
             },
-            { "value": 0.15 }
+            { "value": 0 }
           ],
           "stroke": [
-            {
-              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
-              "scale": "color",
-              "field": "Origin"
-            },
             { "value": "#33a02c" }
           ],
           "fill": { "value": "transparent" }
@@ -501,14 +505,14 @@
           "strokeWidth": { "value": 2 },
           "opacity": [
             {
-              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
-              "value": 0.7
+              "test": "(!length(data('selected')) || indata('selected', 'value', 'Liga Nos'))",
+              "value": 1
             },
-            { "value": 0.15 }
+            { "value": 0 }
           ],
           "stroke": [
             {
-              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
+              "test": "(!length(data('selected')))",
               "scale": "color",
               "field": "Origin"
             },
@@ -531,17 +535,12 @@
           "strokeWidth": { "value": 2 },
           "opacity": [
             {
-              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
-              "value": 0.01
+              "test": "(!length(data('selected')) || indata('selected', 'value', 'Ligue 1'))",
+              "value": 1
             },
-            { "value": 0.15 }
+            { "value": 0 }
           ],
           "stroke": [
-            {
-              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
-              "scale": "color",
-              "field": "Origin"
-            },
             { "value": "#fb9a99" }
           ],
           "fill": { "value": "transparent" }
@@ -560,7 +559,21 @@
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
-          "stroke": { "value": "#fb9a99" },
+          "opacity": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', 'Ligue 1'))",
+              "value": 1
+            },
+            { "value": 0 }
+          ],
+          "stroke": [
+            {
+              "test": "(!length(data('selected')))",
+              "scale": "color",
+              "field": "Origin"
+            },
+            { "value": "#fb9a99" }
+          ],
           "fill": { "value": "#fb9a99" }
         }
       }
@@ -578,17 +591,12 @@
           "strokeWidth": { "value": 2 },
           "opacity": [
             {
-              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
-              "value": 0.01
+              "test": "(!length(data('selected')) || indata('selected', 'value', 'Premier League'))",
+              "value": 1
             },
-            { "value": 0.15 }
+            { "value": 0 }
           ],
           "stroke": [
-            {
-              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
-              "scale": "color",
-              "field": "Origin"
-            },
             { "value": "#e31a1c" }
           ],
           "fill": { "value": "transparent" }
@@ -607,7 +615,21 @@
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
-          "stroke": { "value": "#e31a1c" },
+          "opacity": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', 'Premier League'))",
+              "value": 1
+            },
+            { "value": 0 }
+          ],
+          "stroke": [
+            {
+              "test": "(!length(data('selected')))",
+              "scale": "color",
+              "field": "Origin"
+            },
+            { "value": "#e31a1c" }
+          ],
           "fill": { "value": "#e31a1c" }
         }
       }
@@ -625,17 +647,12 @@
           "strokeWidth": { "value": 2 },
           "opacity": [
             {
-              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
-              "value": 0.01
+              "test": "(!length(data('selected')) || indata('selected', 'value', 'La Liga'))",
+              "value": 1
             },
-            { "value": 0.15 }
+            { "value": 0 }
           ],
           "stroke": [
-            {
-              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
-              "scale": "color",
-              "field": "Origin"
-            },
             { "value": "#ff7f00" }
           ],
           "fill": { "value": "transparent" }
@@ -654,7 +671,21 @@
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
-          "stroke": { "value": "#ff7f00" },
+          "opacity": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', 'La Liga'))",
+              "value": 1
+            },
+            { "value": 0 }
+          ],
+          "stroke": [
+            {
+              "test": "(!length(data('selected')))",
+              "scale": "color",
+              "field": "Origin"
+            },
+            { "value": "#ff7f00" }
+          ],
           "fill": { "value": "#ff7f00" }
         }
       }
@@ -672,17 +703,12 @@
           "strokeWidth": { "value": 2 },
           "opacity": [
             {
-              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
-              "value": 0.01
+              "test": "(!length(data('selected')) || indata('selected', 'value', 'Serie A'))",
+              "value": 1
             },
-            { "value": 0.15 }
+            { "value": 0 }
           ],
           "stroke": [
-            {
-              "test": "(!length(data('selected')) || indata('selected', 'value', datum.Origin))",
-              "scale": "color",
-              "field": "Origin"
-            },
             { "value": "#cab2d6" }
           ],
           "fill": { "value": "transparent" }
@@ -701,7 +727,21 @@
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
-          "stroke": { "value": "#cab2d6" },
+          "opacity": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', 'Serie A'))",
+              "value": 1
+            },
+            { "value": 0 }
+          ],
+          "stroke": [
+            {
+              "test": "(!length(data('selected')))",
+              "scale": "color",
+              "field": "Origin"
+            },
+            { "value": "#cab2d6" }
+          ],
           "fill": { "value": "#cab2d6" }
         }
       }
