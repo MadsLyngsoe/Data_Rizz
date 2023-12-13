@@ -91,6 +91,10 @@ fetch(chartSpec)
         );
         originalTreeData = result.view.data("treeData");
         treemapChartView = result.view;
+        var sliderValues = document.getElementById("slider").value.split(",");
+        treemapChartView.signal("yearMin", sliderValues[0]);
+        treemapChartView.signal("yearMax", sliderValues[1]);
+        treemapChartView.run();
     }).catch(console.warn);
   });
 }

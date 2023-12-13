@@ -42,24 +42,24 @@
           "expr": "datum.year_numeric >= yearMin"
         },
         {
-          "type": "formula",
-          "as": "fee_numeric",
-          "expr": "format(datum.fee_cleaned, ',.0f')"
+          "type": "filter",
+          "expr": "datum.fee_cleaned !== 'NA'"
         },
         {
           "type": "filter",
           "expr": "datum.transfer_movement === transferInOut"
         },
         {
-          "type": "filter",
-          "expr": "datum.fee_cleaned !== 'NA'"
-        },
-        {
           "type": "aggregate",
           "groupby": ["club_name", "league_name"],
-          "fields": ["fee_numeric"],
+          "fields": ["fee_cleaned"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
+        },
+        {
+          "type": "formula",
+          "as": "total_fee_cleaned",
+          "expr": "format(datum.total_fee_cleaned, ',.2f')"
         }
       ]
     },
@@ -81,16 +81,16 @@
           "expr": "datum.year_numeric >= yearMin"
         },
         {
-          "type": "formula",
-          "as": "fee_numeric",
-          "expr": "format(datum.fee_cleaned, ',.0f')"
-        },
-        {
           "type": "aggregate",
           "groupby": ["club_name", "league_name"],
-          "fields": ["fee_numeric"],
+          "fields": ["fee_cleaned"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
+        },
+        {
+          "type": "formula",
+          "as": "total_fee_cleaned",
+          "expr": "format(datum.total_fee_cleaned, ',.2f')"
         }
       ]
     },
@@ -112,16 +112,16 @@
           "expr": "datum.year_numeric >= yearMin"
         },
         {
-          "type": "formula",
-          "as": "fee_numeric",
-          "expr": "format(datum.fee_cleaned, ',.0f')"
-        },
-        {
           "type": "aggregate",
           "groupby": ["club_name", "league_name"],
-          "fields": ["fee_numeric"],
+          "fields": ["fee_cleaned"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
+        },
+        {
+          "type": "formula",
+          "as": "total_fee_cleaned",
+          "expr": "format(datum.total_fee_cleaned, ',.2f')"
         }
       ]
     },
@@ -143,16 +143,16 @@
           "expr": "datum.year_numeric >= yearMin"
         },
         {
-          "type": "formula",
-          "as": "fee_numeric",
-          "expr": "format(datum.fee_cleaned, ',.0f')"
-        },
-        {
           "type": "aggregate",
           "groupby": ["club_name", "league_name"],
-          "fields": ["fee_numeric"],
+          "fields": ["fee_cleaned"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
+        },
+        {
+          "type": "formula",
+          "as": "total_fee_cleaned",
+          "expr": "format(datum.total_fee_cleaned, ',.2f')"
         }
       ]
     },
@@ -174,16 +174,16 @@
           "expr": "datum.year_numeric >= yearMin"
         },
         {
-          "type": "formula",
-          "as": "fee_numeric",
-          "expr": "format(datum.fee_cleaned, ',.0f')"
-        },
-        {
           "type": "aggregate",
           "groupby": ["club_name", "league_name"],
-          "fields": ["fee_numeric"],
+          "fields": ["fee_cleaned"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
+        },
+        {
+          "type": "formula",
+          "as": "total_fee_cleaned",
+          "expr": "format(datum.total_fee_cleaned, ',.2f')"
         }
       ]
     },
@@ -205,16 +205,16 @@
           "expr": "datum.year_numeric >= yearMin"
         },
         {
-          "type": "formula",
-          "as": "fee_numeric",
-          "expr": "format(datum.fee_cleaned, ',.0f')"
-        },
-        {
           "type": "aggregate",
           "groupby": ["club_name", "league_name"],
-          "fields": ["fee_numeric"],
+          "fields": ["fee_cleaned"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
+        },
+        {
+          "type": "formula",
+          "as": "total_fee_cleaned",
+          "expr": "format(datum.total_fee_cleaned, ',.2f')"
         }
       ]
     },
@@ -311,7 +311,7 @@
       "type": "rect",
       "from": { "data": "leaves" },
       "encode": {
-        "enter": { "stroke": { "value": "white" } },
+        "enter": { "stroke": { "value": "black" } },
         "update": {
           "x": { "field": "x0" },
           "y": { "field": "y0" },
@@ -330,25 +330,6 @@
             "signal": "{'Club name': datum.club_name, 'Plays in': datum.league_name,'Money Spent' : datum.total_fee_cleaned + ' Million €'}"
           }
         ]
-        }
-      }
-    },
-    {
-      "type": "text",
-      "from": { "data": "leaves" },
-      "interactive": false,
-      "encode": {
-        "enter": {
-          "font": { "value": "Helvetica Neue, Arial" },
-          "align": { "value": "center" },
-          "baseline": { "value": "middle" },
-          "fill": { "value": "black" },
-          "fontSize": { "scale": "size", "field": "depth" },
-          "fillOpacity": { "scale": "opacity", "field": "depth" }
-        },
-        "update": {
-          "x": { "signal": "0.5 * (datum.x0 + datum.x1)" },
-          "y": { "signal": "0.5 * (datum.y0 + datum.y1)" }
         }
       }
     }

@@ -82,16 +82,16 @@
           "expr": "datum.year_numeric >= yearMin"
         },
         {
-          "type": "formula",
-          "as": "fee_numeric",
-          "expr": "format(datum.fee_cleaned, ',.0f')"
-        },
-        {
           "type": "aggregate",
           "groupby": ["year_numeric"],
-          "fields": ["fee_numeric"],
+          "fields": ["fee_cleaned"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
+        },
+        {
+          "type": "formula",
+          "as": "total_fee_cleaned",
+          "expr": "format(datum.total_fee_cleaned, ',.2f')"
         }
       ]
     },
@@ -133,16 +133,16 @@
           "expr": "datum.year_numeric >= yearMin"
         },
         {
-          "type": "formula",
-          "as": "fee_numeric",
-          "expr": "format(datum.fee_cleaned, ',.0f')"
-        },
-        {
           "type": "aggregate",
           "groupby": ["year_numeric"],
-          "fields": ["fee_numeric"],
+          "fields": ["fee_cleaned"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
+        },
+        {
+          "type": "formula",
+          "as": "total_fee_cleaned",
+          "expr": "format(datum.total_fee_cleaned, ',.2f')"
         }
       ]
     },
@@ -174,16 +174,16 @@
           "expr": "datum.year_numeric >= yearMin"
         },
         {
-          "type": "formula",
-          "as": "fee_numeric",
-          "expr": "format(datum.fee_cleaned, ',.0f')"
-        },
-        {
           "type": "aggregate",
           "groupby": ["year_numeric"],
-          "fields": ["fee_numeric"],
+          "fields": ["fee_cleaned"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
+        },
+        {
+          "type": "formula",
+          "as": "total_fee_cleaned",
+          "expr": "format(datum.total_fee_cleaned, ',.2f')"
         }
       ]
     },
@@ -215,16 +215,16 @@
           "expr": "datum.year_numeric >= yearMin"
         },
         {
-          "type": "formula",
-          "as": "fee_numeric",
-          "expr": "format(datum.fee_cleaned, ',.0f')"
-        },
-        {
           "type": "aggregate",
           "groupby": ["year_numeric"],
-          "fields": ["fee_numeric"],
+          "fields": ["fee_cleaned"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
+        },
+        {
+          "type": "formula",
+          "as": "total_fee_cleaned",
+          "expr": "format(datum.total_fee_cleaned, ',.2f')"
         }
       ]
     },
@@ -256,16 +256,16 @@
           "expr": "datum.year_numeric >= yearMin"
         },
         {
-          "type": "formula",
-          "as": "fee_numeric",
-          "expr": "format(datum.fee_cleaned, ',.0f')"
-        },
-        {
           "type": "aggregate",
           "groupby": ["year_numeric"],
-          "fields": ["fee_numeric"],
+          "fields": ["fee_cleaned"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
+        },
+        {
+          "type": "formula",
+          "as": "total_fee_cleaned",
+          "expr": "format(datum.total_fee_cleaned, ',.2f')"
         }
       ]
     },
@@ -297,16 +297,16 @@
           "expr": "datum.year_numeric >= yearMin"
         },
         {
-          "type": "formula",
-          "as": "fee_numeric",
-          "expr": "format(datum.fee_cleaned, ',.0f')"
-        },
-        {
           "type": "aggregate",
           "groupby": ["year_numeric"],
-          "fields": ["fee_numeric"],
+          "fields": ["fee_cleaned"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
+        },
+        {
+          "type": "formula",
+          "as": "total_fee_cleaned",
+          "expr": "format(datum.total_fee_cleaned, ',.2f')"
         }
       ]
     }
