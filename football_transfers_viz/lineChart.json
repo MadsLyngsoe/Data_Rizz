@@ -1,10 +1,10 @@
 {
-  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "€schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "A basic scatter plot example depicting automobile statistics.",
-  "width": 1000,
+  "width": 1200,
   "height": 300,
   "padding": 5,
-  "title": "Each league spending",
+  "title": "Leagues Total Transfer Fees Each Year",
   "signals": [
     {
       "name": "yearMin",
@@ -13,6 +13,10 @@
     {
       "name": "yearMax",
       "value": "2023"
+    },
+    {
+      "name": "transferInOut",
+      "value": "in"
     },
   
     {
@@ -62,7 +66,7 @@
         },
         {
           "type": "filter",
-          "expr": "datum.transfer_movement === 'in'"
+          "expr": "datum.transfer_movement === transferInOut"
         },
         {
           "type": "formula",
@@ -113,7 +117,7 @@
         },
         {
           "type": "filter",
-          "expr": "datum.transfer_movement === 'in'"
+          "expr": "datum.transfer_movement === transferInOut"
         },
         {
           "type": "formula",
@@ -154,7 +158,7 @@
         },
         {
           "type": "filter",
-          "expr": "datum.transfer_movement === 'in'"
+          "expr": "datum.transfer_movement === transferInOut"
         },
         {
           "type": "formula",
@@ -195,7 +199,7 @@
         },
         {
           "type": "filter",
-          "expr": "datum.transfer_movement === 'in'"
+          "expr": "datum.transfer_movement === transferInOut"
         },
         {
           "type": "formula",
@@ -236,7 +240,7 @@
         },
         {
           "type": "filter",
-          "expr": "datum.transfer_movement === 'in'"
+          "expr": "datum.transfer_movement === transferInOut"
         },
         {
           "type": "formula",
@@ -277,7 +281,7 @@
         },
         {
           "type": "filter",
-          "expr": "datum.transfer_movement === 'in'"
+          "expr": "datum.transfer_movement === transferInOut"
         },
         {
           "type": "formula",
@@ -324,7 +328,11 @@
       "zero": true,
       "domain": {
         "fields": [
+          { "data": "1-bundesliga", "field": "total_fee_cleaned"},
+          { "data": "liga-nos", "field": "total_fee_cleaned"},
+          { "data": "ligue-1", "field": "total_fee_cleaned"},
           { "data": "premier-league", "field": "total_fee_cleaned" },
+          { "data": "primera-division", "field": "total_fee_cleaned"},
           { "data": "serie-a", "field": "total_fee_cleaned" }
         ]
       },
@@ -334,11 +342,11 @@
       "name": "color",
       "type": "ordinal",
       "domain": [
-        "Bundesliga",
+        "1 Bundesliga",
         "Liga Nos",
         "Ligue 1",
         "Premier League",
-        "La Liga",
+        "Primera Division",
         "Serie A"
       ],
       "range": [
@@ -415,6 +423,7 @@
       "name": "1-bundesliga-marks",
       "type": "line",
       "from": { "data": "1-bundesliga" },
+      "sort": {"field": "datum.year_numeric"},
       "encode": {
         "update": {
           "x": { "scale": "x", "field": "year_numeric" },
@@ -423,7 +432,7 @@
           "strokeWidth": { "value": 2 },
           "opacity": [
             {
-              "test": "(!length(data('selected')) || indata('selected', 'value', 'Bundesliga'))",
+              "test": "(!length(data('selected')) || indata('selected', 'value', '1 Bundesliga'))",
               "value": 1
             },
             { "value": 0 }
@@ -438,11 +447,18 @@
     {
       "type": "symbol",
       "from": { "data": "1-bundesliga" },
+      "sort": {"field": "datum.year_numeric"},
       "encode": {
         "update": {
-          "tooltip": {
-            "signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Bundesliga', 'Year': datum.year_numeric}"
-          },
+          "tooltip": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', '1 Bundesliga'))",
+              "signal": "{'Total Transfer Fee': datum.total_fee_cleaned + ' Million €', 'League': '1 Bundesliga', 'Year': datum.year_numeric}"
+            },
+            {
+            "signal": ""
+          }
+        ],
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
@@ -457,7 +473,7 @@
           ],
           "opacity": [
             {
-              "test": "(!length(data('selected')) || indata('selected', 'value', 'Bundesliga'))",
+              "test": "(!length(data('selected')) || indata('selected', 'value', '1 Bundesliga'))",
               "value": 1
             },
             { "value": 0 }
@@ -471,6 +487,7 @@
       "name": "liga-nos-marks",
       "type": "line",
       "from": { "data": "liga-nos" },
+      "sort": {"field": "datum.year_numeric"},
       "encode": {
         "update": {
           "x": { "scale": "x", "field": "year_numeric" },
@@ -494,11 +511,18 @@
     {
       "type": "symbol",
       "from": { "data": "liga-nos" },
+      "sort": {"field": "datum.year_numeric"},
       "encode": {
         "update": {
-          "tooltip": {
-            "signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Liga Nos', 'Year': datum.year_numeric}"
-          },
+          "tooltip": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', 'Liga Nos'))",
+              "signal": "{'Total Transfer Fee': datum.total_fee_cleaned + ' Million €', 'League': 'Liga Nos', 'Year': datum.year_numeric}"
+            },
+            {
+            "signal": ""
+          }
+        ],
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
@@ -527,6 +551,7 @@
       "name": "ligue-1-marks",
       "type": "line",
       "from": { "data": "ligue-1" },
+      "sort": {"field": "datum.year_numeric"},
       "encode": {
         "update": {
           "x": { "scale": "x", "field": "year_numeric" },
@@ -550,11 +575,18 @@
     {
       "type": "symbol",
       "from": { "data": "ligue-1" },
+      "sort": {"field": "datum.year_numeric"},
       "encode": {
         "update": {
-          "tooltip": {
-            "signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Ligue 1', 'Year': datum.year_numeric}"
-          },
+          "tooltip": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', 'Ligue 1'))",
+              "signal": "{'Total Transfer Fee': datum.total_fee_cleaned + ' Million €', 'League': 'Ligue 1', 'Year': datum.year_numeric}"
+            },
+            {
+            "signal": ""
+          }
+        ],
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
@@ -583,6 +615,7 @@
       "name": "premier-league-marks",
       "type": "line",
       "from": { "data": "premier-league" },
+      "sort": {"field": "datum.year_numeric"},
       "encode": {
         "update": {
           "x": { "scale": "x", "field": "year_numeric" },
@@ -606,11 +639,18 @@
     {
       "type": "symbol",
       "from": { "data": "premier-league" },
+      "sort": {"field": "datum.year_numeric"},
       "encode": {
         "update": {
-          "tooltip": {
-            "signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Premier League', 'Year': datum.year_numeric}"
-          },
+          "tooltip": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', 'Premier League'))",
+              "signal": "{'Total Transfer Fee': datum.total_fee_cleaned + ' Million €', 'League': 'Premier League', 'Year': datum.year_numeric}"
+            },
+            {
+            "signal": ""
+          }
+        ],
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
@@ -639,6 +679,7 @@
       "name": "primera-division-marks",
       "type": "line",
       "from": { "data": "primera-division" },
+      "sort": {"field": "datum.year_numeric"},
       "encode": {
         "update": {
           "x": { "scale": "x", "field": "year_numeric" },
@@ -647,7 +688,7 @@
           "strokeWidth": { "value": 2 },
           "opacity": [
             {
-              "test": "(!length(data('selected')) || indata('selected', 'value', 'La Liga'))",
+              "test": "(!length(data('selected')) || indata('selected', 'value', 'Primera Division'))",
               "value": 1
             },
             { "value": 0 }
@@ -662,18 +703,25 @@
     {
       "type": "symbol",
       "from": { "data": "primera-division" },
+      "sort": {"field": "datum.year_numeric"},
       "encode": {
         "update": {
-          "tooltip": {
-            "signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'La Liga', 'Year': datum.year_numeric}"
-          },
+          "tooltip": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', 'Primera Division'))",
+              "signal": "{'Total Transfer Fee': datum.total_fee_cleaned + ' Million €', 'League': 'Primera Division', 'Year': datum.year_numeric}"
+            },
+            {
+            "signal": ""
+          }
+        ],
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },
           "strokeWidth": { "value": 2 },
           "opacity": [
             {
-              "test": "(!length(data('selected')) || indata('selected', 'value', 'La Liga'))",
+              "test": "(!length(data('selected')) || indata('selected', 'value', 'Primera Division'))",
               "value": 1
             },
             { "value": 0 }
@@ -695,6 +743,7 @@
       "name": "serie-a-marks",
       "type": "line",
       "from": { "data": "serie-a" },
+      "sort": {"field": "datum.year_numeric"},
       "encode": {
         "update": {
           "x": { "scale": "x", "field": "year_numeric" },
@@ -718,11 +767,18 @@
     {
       "type": "symbol",
       "from": { "data": "serie-a" },
+      "sort": {"field": "datum.year_numeric"},
       "encode": {
         "update": {
-          "tooltip": {
-            "signal": "{'Spending': datum.total_fee_cleaned + ' Million $', 'League': 'Serie A', 'Year': datum.year_numeric}"
-          },
+          "tooltip": [
+            {
+              "test": "(!length(data('selected')) || indata('selected', 'value', 'Serie A'))",
+              "signal": "{'Total Transfer Fee': datum.total_fee_cleaned + ' Million €', 'League': 'Serie A', 'Year': datum.year_numeric}"
+            },
+            {
+            "signal": ""
+          }
+        ],
           "x": { "scale": "x", "field": "year_numeric" },
           "y": { "scale": "y", "field": "total_fee_cleaned" },
           "shape": { "value": "circle" },

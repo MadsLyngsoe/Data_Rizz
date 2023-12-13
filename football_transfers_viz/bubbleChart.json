@@ -7,7 +7,7 @@
     "offset": 10,
     "fontSize": 60
   },
-  "width": 400,
+  "width": 480,
   "height": 600,
   "background": "#e8e2e1",
   "padding": { "top": 0, "bottom": 0 },
@@ -17,7 +17,11 @@
     { "name": "cy", "update": "height / 2" },
     { "name": "clubName", "value": "" },
     { "name": "yearMin", "value": 1992 },
-    { "name": "yearMax", "value": 2021 }
+    { "name": "yearMax", "value": 2021 },
+    {
+      "name": "transferInOut",
+      "value": "in"
+    }
   ],
   "data": [
     {
@@ -45,7 +49,7 @@
         },
         {
           "type": "filter",
-          "expr": "datum.transfer_movement === 'in'"
+          "expr": "datum.transfer_movement === transferInOut"
         },
         {
           "type": "filter",
@@ -90,9 +94,15 @@
           },
           "stroke": { "value": "black" },
           "strokeWidth": { "value": 1 },
-          "tooltip": {
-            "signal": "{'Player': datum.player_name, 'Age': datum.age, 'Transfer fee' : datum.fee, 'Bought/loaned from' : datum.club_involved_name, 'Came to the club in' : datum.year_numeric}"
+          "tooltip": [
+            {
+              "test": "transferInOut == 'out'",
+              "signal": "{'Player': datum.player_name, 'Age': datum.age, 'Sold for' : datum.fee, 'Sold/loaned to' : datum.club_involved_name, 'Left the club in' : datum.year_numeric}"
+            },
+            {
+            "signal": "{'Player': datum.player_name, 'Age': datum.age, 'Bought for' : datum.fee, 'Bought/loaned from' : datum.club_involved_name, 'Came to the club in' : datum.year_numeric}"
           }
+        ]
         }
       },
       "transform": [

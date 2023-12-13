@@ -13,13 +13,16 @@
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
-    <div class="container text-center">
+    <div class="container">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" checked="true" disabled="true" value="in" onchange="if(this.checked) this.disabled = true; document.getElementById('inlineCheckbox2').checked = false; document.getElementById('inlineCheckbox2').disabled = false; setTransferInOrOut('in');">
+        <label class="form-check-label" for="inlineCheckbox1">Transfer in</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="out" onchange="if(this.checked) this.disabled = true; document.getElementById('inlineCheckbox1').checked = false; document.getElementById('inlineCheckbox1').disabled = false; setTransferInOrOut('out');">
+        <label class="form-check-label" for="inlineCheckbox2">Transfer out</label>
+      </div>
         <div class="row">        
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-            </label>
-          </div>
           <div class="col" id="col1-1">
             <script type="text/javascript">createChart('#col1-1', 'lineChart.json')</script>
           </div>
