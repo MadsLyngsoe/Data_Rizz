@@ -1,51 +1,51 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "title": {
-    "text": "lololol",
-    "color": "black",
-    "anchor": "start",
-    "offset": 10,
-    "fontSize": 60
-  },
-  "width": 480,
-  "height": 600,
-  "background": "#e8e2e1",
-  "padding": { "top": 0, "bottom": 0 },
-  "autosize": "none",
+  "description": "A top-k bar chart ranking film directors by revenue.",
+  "width": 500,
+  "height": 410,
+  "padding": 5,
+  "autosize": "fit",
+
   "signals": [
-    { "name": "cx", "update": "width / 2" },
-    { "name": "cy", "update": "height / 2" },
+    {
+      "name": "k", "value": 5,
+      "bind": {"input": "select", "options": [5, 10, 20, 30]}
+    },
+    {
+      "name": "op", "value": "average",
+      "bind": {"input": "select", "options": ["average", "median", "sum"]}
+    },
     { "name": "clubName", "value": "" },
-    { "name": "yearMin", "value": 1992 },
-    { "name": "yearMax", "value": 2021 },
+    {
+      "name": "yearMin",
+      "value": "1992"
+    },
+    {
+      "name": "yearMax",
+      "value": "2023"
+    },
     {
       "name": "transferInOut",
       "value": "in"
     }
+
   ],
+
+  "title": {
+    "text": "HELLO",
+    "anchor": "start",
+    "frame": "group"
+  },
+
   "data": [
     {
-      "name": "leagueData",
-      "url": "/data/primera-division.csv",
+      "name": "directors",
+      "url": "/data/1-bundesliga.csv",
       "format": { "type": "csv" },
       "transform": [
         {
           "type": "filter",
           "expr": "datum.fee_cleaned > 0"
-        },
-        {
-          "type": "formula",
-          "as": "year_numeric",
-          "expr": "toNumber(datum.year)"
-        },
-        {
-          "type": "filter",
-          "expr": "datum.fee_cleaned !== 'NA'"
-        },
-        {
-          "type": "formula",
-          "as": "fee_numeric",
-          "expr": "format(datum.fee_cleaned, ',.2f')"
         },
         {
           "type": "filter",
@@ -56,6 +56,11 @@
           "expr": "datum.transfer_movement === transferInOut"
         },
         {
+          "type": "formula",
+          "as": "year_numeric",
+          "expr": "toNumber(datum.year)"
+        },
+        {
           "type": "filter",
           "expr": "datum.year_numeric <= yearMax"
         },
@@ -64,95 +69,77 @@
           "expr": "datum.year_numeric >= yearMin"
         }
       ]
+    },
+    {
+      "name": "ranks",
+      "source": "directors",
+      "transform": [
+        {
+          "type": "window",
+          "sort": {"field": "fee_cleaned", "order": "descending"},
+          "ops": ["row_number"], "as": ["rank"]
+        },
+        {
+          "type": "collect",
+          "sort": {"field": "rank", "order": "ascending"}
+        },
+        {
+          "type": "filter",
+          "expr": "datum.rank <= k"
+        }
+      ]
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "rect",
+      "from": {"data": "ranks"},
+      "encode": {
+        "update": {
+          "x": {"scale": "x", "value": 0},
+          "x2": {"scale": "x", "field": "fee_cleaned"},
+          "y": {"scale": "y", "field": "player_name"},
+          "height": {"scale": "y", "band": 1}
+        },
+        "hover": {
+          "tooltip": {"signal": "datum"}
+        }
+      }
     }
   ],
 
   "scales": [
     {
-      "name": "size",
-      "domain": { "data": "leagueData", "field": "fee_numeric" },
-      "range": [300, 800]
+      "name": "x",
+      "type": "linear",
+      "domain": {"data": "ranks", "field": "fee_cleaned"},
+      "range": "width",
+      "nice": true
     },
     {
-      "name": "color",
-      "type": "ordinal",
-      "domain": { "data": "leagueData", "field": "player_name" },
-      "range": { "scheme": "category20" }
+      "name": "y",
+      "type": "band",
+      "domain": {
+        "data": "ranks", "field": "player_name"
+      },
+      "range": "height",
+      "padding": 0.1
     }
   ],
-  "marks": [
+
+  "axes": [
     {
-      "name": "nodes",
-      "type": "symbol",
-      "from": { "data": "leagueData" },
-      "encode": {
-        "enter": {
-          "fill": { "scale": "color", "field": "player_name" },
-          "xfocus": { "signal": "cx" },
-          "yfocus": { "signal": "cy" }
-        },
-        "update": {
-          "size": {
-            "signal": "pow(2 * datum.fee_cleaned, 2)",
-            "scale": "size"
-          },
-          "stroke": { "value": "black" },
-          "strokeWidth": { "value": 1 },
-          "tooltip": [
-            {
-              "test": "transferInOut == 'out'",
-              "signal": "{'Player': datum.player_name, 'Age': datum.age, 'Sold for' : datum.fee_numeric + ' Million €', 'Sold/loaned to' : datum.club_involved_name, 'Left the club in' : datum.year_numeric}"
-            },
-            {
-            "signal": "{'Player': datum.player_name, 'Age': datum.age, 'Bought for' : datum.fee_numeric + ' Million €', 'Bought/loaned from' : datum.club_involved_name, 'Came to the club in' : datum.year_numeric}"
-          }
-        ]
-        }
-      },
-      "transform": [
-        {
-          "type": "force",
-          "iterations": 100,
-          "static": false,
-          "forces": [
-            {
-              "force": "collide",
-              "iterations": 2,
-              "radius": { "expr": "sqrt(datum.size) / 2" }
-            },
-            {
-              "force": "center",
-              "x": { "signal": "cx" },
-              "y": { "signal": "cy" }
-            },
-            {
-              "force": "x",
-              "x": "xfocus",
-              "strength": 0.2
-            },
-            {
-              "force": "y",
-              "y": "yfocus",
-              "strength": 0.1
-            }
-          ]
-        }
-      ]
+      "scale": "x",
+      "orient": "bottom",
+      "format": "d",
+      "tickCount": 5,
+      "title": "Transfer Fee (Million EUR)"
     },
     {
-      "type": "text",
-      "from": { "data": "nodes" },
-      "encode": {
-        "enter": {
-          "align": { "value": "center" },
-          "baseline": { "value": "middle" },
-          "fontSize": { "value": 10 },
-          "fontWeight": { "value": "bold" },
-          "fill": { "value": "black" },
-          "text": { "field": "datum.player_name" }
-        },
-        "update": { "x": { "field": "x" }, "y": { "field": "y" } }
-      }
+      "scale": "y",
+      "orient": "left",
+      "title": "Player name"
     }
   ]
 }
