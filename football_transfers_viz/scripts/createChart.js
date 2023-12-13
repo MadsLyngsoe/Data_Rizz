@@ -103,7 +103,6 @@ fetch(chartSpec)
 
 function createBubbleChart(divId, chartSpec, year, clubName, leagueName) {
   var splittedYears = year?.split(",");
-  console.log(splittedYears);
   if(splittedYears !== undefined) {
     var yearMin = parseInt(splittedYears[0]);
     var yearMax = parseInt(splittedYears[1]);
@@ -113,8 +112,8 @@ fetch(chartSpec)
   .then((data) => {
     spec = data;
     if(yearMax !== undefined && yearMin !== undefined) {
-      spec.signals[1].value = yearMin;
-      spec.signals[2].value = yearMax;
+      spec.signals[3].value = yearMin;
+      spec.signals[4].value = yearMax;
     }
     switch(leagueName) {
       case "1 Bundesliga":

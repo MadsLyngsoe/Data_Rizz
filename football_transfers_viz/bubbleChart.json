@@ -12,8 +12,8 @@
       "bind": {"input": "select", "options": [5, 10, 20, 30]}
     },
     {
-      "name": "op", "value": "average",
-      "bind": {"input": "select", "options": ["average", "median", "sum"]}
+      "name": "sortOrder", "value": "descending",
+      "bind": {"input": "select", "options": [ "descending", "ascending"]}
     },
     { "name": "clubName", "value": "" },
     {
@@ -75,17 +75,21 @@
       "source": "directors",
       "transform": [
         {
-          "type": "window",
-          "sort": {"field": "fee_cleaned", "order": "descending"},
-          "ops": ["row_number"], "as": ["rank"]
+          "type": "filter",
+          "expr": "datum.transfer_movement === transferInOut"
         },
         {
-          "type": "collect",
-          "sort": {"field": "rank", "order": "ascending"}
+          "type": "window",
+          "sort": {"field": "fee_cleaned", "order": {"signal": "sortOrder"}},
+          "ops": ["row_number"], "as": ["rank"]
         },
         {
           "type": "filter",
           "expr": "datum.rank <= k"
+        },
+        {
+          "type": "collect",
+          "sort": {"field": "rank", "order": "ascending"}
         }
       ]
     }

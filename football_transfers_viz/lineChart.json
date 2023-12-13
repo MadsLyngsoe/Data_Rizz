@@ -80,7 +80,7 @@
         {
           "type": "formula",
           "as": "total_fee_cleaned",
-          "expr": "format(datum.total_fee_cleaned, ',.2f')"
+          "expr": "format(datum.total_fee_cleaned, '.2f')"
         }
       ]
     },
@@ -129,7 +129,7 @@
         {
           "type": "formula",
           "as": "total_fee_cleaned",
-          "expr": "format(datum.total_fee_cleaned, ',.2f')"
+          "expr": "format(datum.total_fee_cleaned, '.2f')"
         }
       ]
     },
@@ -170,7 +170,7 @@
         {
           "type": "formula",
           "as": "total_fee_cleaned",
-          "expr": "format(datum.total_fee_cleaned, ',.2f')"
+          "expr": "format(datum.total_fee_cleaned, '.2f')"
         }
       ]
     },
@@ -211,7 +211,7 @@
         {
           "type": "formula",
           "as": "total_fee_cleaned",
-          "expr": "format(datum.total_fee_cleaned, ',.2f')"
+          "expr": "format(datum.total_fee_cleaned, '.2f')"
         }
       ]
     },
@@ -252,7 +252,7 @@
         {
           "type": "formula",
           "as": "total_fee_cleaned",
-          "expr": "format(datum.total_fee_cleaned, ',.2f')"
+          "expr": "format(datum.total_fee_cleaned, '.2f')"
         }
       ]
     },
@@ -293,7 +293,7 @@
         {
           "type": "formula",
           "as": "total_fee_cleaned",
-          "expr": "format(datum.total_fee_cleaned, ',.2f')"
+          "expr": "format(datum.total_fee_cleaned, '.2f')"
         }
       ]
     }
@@ -313,7 +313,16 @@
       "round": true,
       "nice": true,
       "zero": true,
-      "domain": [0, 2000],
+      "domain": {
+        "fields": [
+        { "data": "1-bundesliga", "field": "total_fee_cleaned" },
+        { "data": "liga-nos", "field": "total_fee_cleaned" },
+        { "data": "ligue-1", "field": "total_fee_cleaned" },
+        { "data": "premier-league", "field": "total_fee_cleaned" },
+        { "data": "primera-division", "field": "total_fee_cleaned" },
+        { "data": "serie-a", "field": "total_fee_cleaned" }
+        ]
+      },
       "range": "height" 
     },
     {
