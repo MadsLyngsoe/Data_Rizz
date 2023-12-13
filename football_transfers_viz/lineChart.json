@@ -31,17 +31,6 @@
       ]
     },
     {
-      "name": "shift",
-      "value": false,
-      "on": [
-        {
-          "events": "@legendSymbol:click, @legendLabel:click",
-          "update": "event.shiftKey",
-          "force": true
-        }
-      ]
-    },
-    {
       "name": "clicked",
       "value": null,
       "on": [
@@ -100,9 +89,7 @@
       "name": "selected",
       "on": [
         { "trigger": "clear", "remove": true },
-        { "trigger": "!shift", "remove": true },
-        { "trigger": "!shift && clicked", "insert": "clicked" },
-        { "trigger": "shift && clicked", "toggle": "clicked" }
+        { "trigger": "clicked", "toggle": "clicked" }
       ]
     },
 
@@ -326,17 +313,8 @@
       "round": true,
       "nice": true,
       "zero": true,
-      "domain": {
-        "fields": [
-          { "data": "1-bundesliga", "field": "total_fee_cleaned"},
-          { "data": "liga-nos", "field": "total_fee_cleaned"},
-          { "data": "ligue-1", "field": "total_fee_cleaned"},
-          { "data": "premier-league", "field": "total_fee_cleaned" },
-          { "data": "primera-division", "field": "total_fee_cleaned"},
-          { "data": "serie-a", "field": "total_fee_cleaned" }
-        ]
-      },
-      "range": "height"
+      "domain": [0, 2000],
+      "range": "height" 
     },
     {
       "name": "color",
