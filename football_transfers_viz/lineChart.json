@@ -51,7 +51,16 @@
       "transform": [
         {
           "type": "filter",
-          "expr": "datum.fee_cleaned > 0"
+          "expr": "datum.fee_cleaned !== 'NA'"
+        },
+        {
+          "type": "formula",
+          "as": "fee_numeric",
+          "expr": "toNumber(datum.fee_cleaned)"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.fee_numeric > 0"
         },
         {
           "type": "filter",
@@ -73,14 +82,14 @@
         {
           "type": "aggregate",
           "groupby": ["year_numeric"],
-          "fields": ["fee_cleaned"],
+          "fields": ["fee_numeric"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
         },
         {
           "type": "formula",
           "as": "total_fee_cleaned",
-          "expr": "format(datum.total_fee_cleaned, ',.2f')"
+          "expr": "format(datum.total_fee_cleaned, '.2f')"
         }
       ]
     },
@@ -100,7 +109,16 @@
       "transform": [
         {
           "type": "filter",
-          "expr": "datum.fee_cleaned > 0"
+          "expr": "datum.fee_cleaned !== 'NA'"
+        },
+        {
+          "type": "formula",
+          "as": "fee_numeric",
+          "expr": "toNumber(datum.fee_cleaned)"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.fee_numeric > 0"
         },
         {
           "type": "filter",
@@ -122,14 +140,14 @@
         {
           "type": "aggregate",
           "groupby": ["year_numeric"],
-          "fields": ["fee_cleaned"],
+          "fields": ["fee_numeric"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
         },
         {
           "type": "formula",
           "as": "total_fee_cleaned",
-          "expr": "format(datum.total_fee_cleaned, ',.2f')"
+          "expr": "format(datum.total_fee_cleaned, '.2f')"
         }
       ]
     },
@@ -141,7 +159,16 @@
       "transform": [
         {
           "type": "filter",
-          "expr": "datum.fee_cleaned > 0"
+          "expr": "datum.fee_cleaned !== 'NA'"
+        },
+        {
+          "type": "formula",
+          "as": "fee_numeric",
+          "expr": "toNumber(datum.fee_cleaned)"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.fee_numeric > 0"
         },
         {
           "type": "filter",
@@ -163,14 +190,14 @@
         {
           "type": "aggregate",
           "groupby": ["year_numeric"],
-          "fields": ["fee_cleaned"],
+          "fields": ["fee_numeric"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
         },
         {
           "type": "formula",
           "as": "total_fee_cleaned",
-          "expr": "format(datum.total_fee_cleaned, ',.2f')"
+          "expr": "format(datum.total_fee_cleaned, '.2f')"
         }
       ]
     },
@@ -182,7 +209,16 @@
       "transform": [
         {
           "type": "filter",
-          "expr": "datum.fee_cleaned > 0"
+          "expr": "datum.fee_cleaned !== 'NA'"
+        },
+        {
+          "type": "formula",
+          "as": "fee_numeric",
+          "expr": "toNumber(datum.fee_cleaned)"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.fee_numeric > 0"
         },
         {
           "type": "filter",
@@ -204,14 +240,14 @@
         {
           "type": "aggregate",
           "groupby": ["year_numeric"],
-          "fields": ["fee_cleaned"],
+          "fields": ["fee_numeric"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
         },
         {
           "type": "formula",
           "as": "total_fee_cleaned",
-          "expr": "format(datum.total_fee_cleaned, ',.2f')"
+          "expr": "format(datum.total_fee_cleaned, '.2f')"
         }
       ]
     },
@@ -223,7 +259,16 @@
       "transform": [
         {
           "type": "filter",
-          "expr": "datum.fee_cleaned > 0"
+          "expr": "datum.fee_cleaned !== 'NA'"
+        },
+        {
+          "type": "formula",
+          "as": "fee_numeric",
+          "expr": "toNumber(datum.fee_cleaned)"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.fee_numeric > 0"
         },
         {
           "type": "filter",
@@ -245,14 +290,14 @@
         {
           "type": "aggregate",
           "groupby": ["year_numeric"],
-          "fields": ["fee_cleaned"],
+          "fields": ["fee_numeric"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
         },
         {
           "type": "formula",
           "as": "total_fee_cleaned",
-          "expr": "format(datum.total_fee_cleaned, ',.2f')"
+          "expr": "format(datum.total_fee_cleaned, '.2f')"
         }
       ]
     },
@@ -264,7 +309,16 @@
       "transform": [
         {
           "type": "filter",
-          "expr": "datum.fee_cleaned > 0"
+          "expr": "datum.fee_cleaned !== 'NA'"
+        },
+        {
+          "type": "formula",
+          "as": "fee_numeric",
+          "expr": "toNumber(datum.fee_cleaned)"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.fee_numeric > 0"
         },
         {
           "type": "filter",
@@ -286,14 +340,14 @@
         {
           "type": "aggregate",
           "groupby": ["year_numeric"],
-          "fields": ["fee_cleaned"],
+          "fields": ["fee_numeric"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
         },
         {
           "type": "formula",
           "as": "total_fee_cleaned",
-          "expr": "format(datum.total_fee_cleaned, ',.2f')"
+          "expr": "format(datum.total_fee_cleaned, '.2f')"
         }
       ]
     }
@@ -310,10 +364,17 @@
     {
       "name": "y",
       "type": "linear",
-      "round": true,
       "nice": true,
-      "zero": true,
-      "domain": [0, 2000],
+      "domain": {
+        "fields": [
+        { "data": "1-bundesliga", "field": "total_fee_cleaned" },
+        { "data": "liga-nos", "field": "total_fee_cleaned" },
+        { "data": "ligue-1", "field": "total_fee_cleaned" },
+        { "data": "premier-league", "field": "total_fee_cleaned" },
+        { "data": "primera-division", "field": "total_fee_cleaned" },
+        { "data": "serie-a", "field": "total_fee_cleaned" }
+        ]
+      },
       "range": "height" 
     },
     {
@@ -328,12 +389,12 @@
         "Serie A"
       ],
       "range": [
-        "#a6cee3",
-        "#33a02c",
-        "#fb9a99",
-        "#e31a1c",
-        "#ff7f00",
-        "#cab2d6"
+        "#E69F00",
+        "#56B4E9",
+        "#009E73",
+        "#0072B2",
+        "#D55E00",
+        "#CC79A7"
       ]
     }
   ],
@@ -416,7 +477,7 @@
             { "value": 0 }
           ],
           "stroke": [
-            { "value": "#a6cee3" }
+            { "value": "#E69F00" }
           ],
           "fill": { "value": "transparent" }
         }
@@ -447,7 +508,7 @@
               "scale": "color",
               "field": "Origin"
             },
-            { "value": "#a6cee3" }
+            { "value": "#E69F00" }
           ],
           "opacity": [
             {
@@ -456,7 +517,7 @@
             },
             { "value": 0 }
           ],
-          "fill": { "value": "#a6cee3" }
+          "fill": { "value": "#E69F00" }
         }
       }
     },
@@ -480,7 +541,7 @@
             { "value": 0 }
           ],
           "stroke": [
-            { "value": "#33a02c" }
+            { "value": "#56B4E9" }
           ],
           "fill": { "value": "transparent" }
         }
@@ -518,9 +579,9 @@
               "scale": "color",
               "field": "Origin"
             },
-            { "value": "#33a02c" }
+            { "value": "#56B4E9" }
           ],
-          "fill": { "value": "#33a02c" }
+          "fill": { "value": "#56B4E9" }
         }
       }
     },
@@ -544,7 +605,7 @@
             { "value": 0 }
           ],
           "stroke": [
-            { "value": "#fb9a99" }
+            { "value": "#009E73" }
           ],
           "fill": { "value": "transparent" }
         }
@@ -582,9 +643,9 @@
               "scale": "color",
               "field": "Origin"
             },
-            { "value": "#fb9a99" }
+            { "value": "#009E73" }
           ],
-          "fill": { "value": "#fb9a99" }
+          "fill": { "value": "#009E73" }
         }
       }
     },
@@ -608,7 +669,7 @@
             { "value": 0 }
           ],
           "stroke": [
-            { "value": "#e31a1c" }
+            { "value": "#0072B2" }
           ],
           "fill": { "value": "transparent" }
         }
@@ -646,9 +707,9 @@
               "scale": "color",
               "field": "Origin"
             },
-            { "value": "#e31a1c" }
+            { "value": "#0072B2" }
           ],
-          "fill": { "value": "#e31a1c" }
+          "fill": { "value": "#0072B2" }
         }
       }
     },
@@ -672,7 +733,7 @@
             { "value": 0 }
           ],
           "stroke": [
-            { "value": "#ff7f00" }
+            { "value": "#D55E00" }
           ],
           "fill": { "value": "transparent" }
         }
@@ -710,9 +771,9 @@
               "scale": "color",
               "field": "Origin"
             },
-            { "value": "#ff7f00" }
+            { "value": "#D55E00" }
           ],
-          "fill": { "value": "#ff7f00" }
+          "fill": { "value": "#D55E00" }
         }
       }
     },
@@ -736,7 +797,7 @@
             { "value": 0 }
           ],
           "stroke": [
-            { "value": "#cab2d6" }
+            { "value": "#CC79A7" }
           ],
           "fill": { "value": "transparent" }
         }
@@ -774,9 +835,9 @@
               "scale": "color",
               "field": "Origin"
             },
-            { "value": "#cab2d6" }
+            { "value": "#CC79A7" }
           ],
-          "fill": { "value": "#cab2d6" }
+          "fill": { "value": "#CC79A7" }
         }
       }
     }

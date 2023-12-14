@@ -7,12 +7,12 @@ var bubbleChartView;
 
 var originalTreeData;
 
-const bundesligaColor = "#a6cee3";
-const ligaNosColor = "#33a02c";
-const ligue1Color = "#fb9a99";
-const premierLeagueColor = "#e31a1c";
-const laLigaColor = "#ff7f00";
-const serieAColor = "#cab2d6";
+const bundesligaColor = "#E69F00";
+const ligaNosColor = "#56B4E9";
+const ligue1Color = "#009E73";
+const premierLeagueColor = "#0072B2";
+const laLigaColor = "#D55E00";
+const serieAColor = "#CC79A7";
 
 function createChart(divId, chartSpec) {
 fetch(chartSpec)
