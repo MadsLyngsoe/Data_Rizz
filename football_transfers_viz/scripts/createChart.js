@@ -14,21 +14,38 @@ const premierLeagueColor = "#0072B2";
 const laLigaColor = "#D55E00";
 const serieAColor = "#CC79A7";
 
-function createChart(divId, chartSpec) {
+function createLineChart(divId, chartSpec) {
 fetch(chartSpec)
   .then((res) => res.json())
   .then((data) => {
     spec = data;
     vegaEmbed(divId, spec, {"actions": true}).then(result => {
+      if(chartSpec == "lineChart.json" || chartSpec == "barChart.json") {
       result.view.addDataListener("selected", function(name, value) {
         createTreemap("#col2-1", "treemap.json");
         if(bubbleChartView != null) {
-          bubbleChartView.finalize();
           treeMapSelected = null;
           document.getElementById("col2-2").innerHTML = "";
         } 
-      })
-      lineChartView = result.view;
+      });
+      if(!document.getElementById("checkbox1").checked){
+      result.view.addSignalListener("yearMin", function(name, value) {
+        createTreemap("#col2-1", "treemap.json");
+        if(bubbleChartView != null) {
+          treeMapSelected = null;
+          document.getElementById("col2-2").innerHTML = "";
+        } 
+      });
+      result.view.addSignalListener("yearMax", function(name, value) {
+        createTreemap("#col2-1", "treemap.json");
+        if(bubbleChartView != null) {
+          treeMapSelected = null;
+          document.getElementById("col2-2").innerHTML = "";
+        } 
+      });
+    }
+    }
+    lineChartView = result.view;
     });
   });
   createTreemap("#col2-1", "treemap.json");
@@ -37,9 +54,26 @@ fetch(chartSpec)
 }
 
 function createTreemap(divId, chartSpec) {
+  var splittedYears = document.getElementById("slider").value.split(",")
+  if(splittedYears !== undefined) {
+    var yearMin = parseInt(splittedYears[0]);
+    var yearMax = parseInt(splittedYears[1]);
+  }
 fetch(chartSpec)
   .then((res) => res.json())
   .then((data) => {
+    if(!document.getElementById("checkbox1").checked) {
+      data.signals.push({
+        "name": "year", "value": yearMin,
+        "bind": {"input": "range", "min": yearMin, "max": yearMax, "step": 1}
+      });
+      for(var element in data.data) {
+        if(element < 6) {
+          data.data[element].transform[5].expr = "datum.year_numeric == year";
+        }
+      }
+     data.title.text = { signal: "'Clubs Total Transfer Fees In ' + year" }
+    }
     if(lineChartView != undefined) {
     if(lineChartView.data("selected").length != 0) {
       var selectedLeagues = [];
@@ -115,6 +149,15 @@ fetch(chartSpec)
       spec.signals[3].value = yearMin;
       spec.signals[4].value = yearMax;
     }
+    if(!document.getElementById("checkbox1").checked) {
+      spec.signals.push({
+        "name": "year", "value": yearMin,
+        "bind": {"input": "range", "min": yearMin, "max": yearMax, "step": 1}
+      });
+      console.log(spec.signals)
+      spec.data[0].transform[5].expr = "datum.year_numeric == year";
+      spec.title.text ={ signal: "clubName + ' top transfered players by fee' + ' in year ' + year" }
+    }
     switch(leagueName) {
       case "1 Bundesliga":
         spec.data[0].url = "/data/1-bundesliga.csv"
@@ -178,6 +221,7 @@ function getBubbleChartView() {
 
 function sliderUpdateCharts(value) {
   var sliderValues = value.split(",");
+  if(document.getElementById("checkbox1").checked) {
   if(lineChartView != null) {
     lineChartView.signal("yearMin", parseInt(sliderValues[0]));
     lineChartView.signal("yearMax", parseInt(sliderValues[1]));
@@ -193,4 +237,21 @@ function sliderUpdateCharts(value) {
     bubbleChartView.signal("yearMax", parseInt(sliderValues[1]));
     bubbleChartView.run();
   }
+} else {
+  if(lineChartView != null) {
+    lineChartView.signal("yearMin", parseInt(sliderValues[0]));
+    lineChartView.signal("yearMax", parseInt(sliderValues[1]));
+    lineChartView.run();
+  }
+  if(treemapChartView != null) {
+    treemapChartView.signal("year", parseInt(sliderValues[0]));
+    treemapChartView.signal("yearMax", parseInt(sliderValues[1]));
+    treemapChartView.run();
+  }
+  if(bubbleChartView != null) {
+    bubbleChartView.signal("yearMin", parseInt(sliderValues[0]));
+    bubbleChartView.signal("yearMax", parseInt(sliderValues[1]));
+    bubbleChartView.run();
+  }
+}
 }

@@ -1,6 +1,6 @@
 {
   "€schema": "https://vega.github.io/schema/vega/v5.json",
-  "description": "A basic scatter plot example depicting automobile statistics.",
+  "description": "A basic line chart example depicting automobile statistics.",
   "width": 1200,
   "height": 300,
   "padding": 5,
@@ -44,6 +44,14 @@
   ],
 
   "data": [
+    {
+      "name": "selected",
+      "on": [
+        { "trigger": "clear", "remove": true },
+        { "trigger": "clicked", "toggle": "clicked" }
+      ]
+    },
+
     {
       "name": "1-bundesliga",
       "url": "/data/1-bundesliga.csv",
@@ -91,14 +99,6 @@
           "as": "total_fee_cleaned",
           "expr": "format(datum.total_fee_cleaned, '.2f')"
         }
-      ]
-    },
-
-    {
-      "name": "selected",
-      "on": [
-        { "trigger": "clear", "remove": true },
-        { "trigger": "clicked", "toggle": "clicked" }
       ]
     },
 

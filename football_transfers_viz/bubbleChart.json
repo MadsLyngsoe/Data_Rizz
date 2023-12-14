@@ -28,11 +28,10 @@
       "name": "transferInOut",
       "value": "in"
     }
-
   ],
 
   "title": {
-    "text": {"signal": "clubName + ' top transfers by fee'"},
+    "text": {"signal": "clubName + ' top transfered players by fee'"},
     "anchor": "start",
     "frame": "group"
   },
@@ -141,8 +140,7 @@
     },
     {
       "scale": "y",
-      "orient": "left",
-      "title": "Player name"
+      "orient": "left"
     }
   ]
 }
