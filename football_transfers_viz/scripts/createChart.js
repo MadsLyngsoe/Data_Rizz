@@ -72,7 +72,7 @@ fetch(chartSpec)
           data.data[element].transform[5].expr = "datum.year_numeric == year";
         }
       }
-     data.title.text = { signal: "'Clubs Total Transfer Fees In ' + year" }
+     data.title.text = { signal: "'Clubs total transfer fees in ' + year" }
     }
     if(lineChartView != undefined) {
     if(lineChartView.data("selected").length != 0) {

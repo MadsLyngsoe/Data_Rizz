@@ -42,6 +42,12 @@
           }
         ],
 
+        "title": {
+            "text": {"signal": "'Leagues total transfer fees '+ yearMin + ' - ' + yearMax"},
+            "anchor": "start",
+            "frame": "group"
+          },
+          
       "data": [
         {
             "name": "selected",
@@ -392,8 +398,8 @@
           ],
         
           "axes": [
-            {"orient": "left", "scale": "yscale"},
-            {"orient": "bottom", "scale": "xscale"}
+            {"orient": "left", "grid": true, "scale": "yscale"},
+            {"orient": "bottom", "grid": true, "scale": "xscale"}
           ],
 
           "legends": [

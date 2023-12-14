@@ -4,7 +4,7 @@
   "width": 1200,
   "height": 300,
   "padding": 5,
-  "title": "Leagues Total Transfer Fees Each Year",
+  "title": "Leagues total transfer fees each year",
   "signals": [
     {
       "name": "yearMin",

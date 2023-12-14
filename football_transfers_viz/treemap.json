@@ -18,9 +18,11 @@
       "value": "in"
     }
   ],
-
+  
   "title": {
-    "text": "Clubs Total Transfer Fees For Selected Years"
+    "text": {"signal": "'Clubs total transfer fees '+ yearMin + ' - ' + yearMax"},
+    "anchor": "start",
+    "frame": "group"
   },
 
   "data": [
