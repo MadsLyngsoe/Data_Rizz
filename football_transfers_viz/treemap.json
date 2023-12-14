@@ -29,8 +29,17 @@
       "url": "/data/1-bundesliga.csv",
       "format": { "type": "csv", "delimiter": "," },
       "transform": [
-        { "type": "filter", "expr": "datum.fee_cleaned > 0" },
         { "type": "filter", "expr": "datum.transfer_movement === transferInOut" },
+        {
+          "type": "filter",
+          "expr": "datum.fee_cleaned !== 'NA'"
+        },
+        {
+          "type": "formula",
+          "as": "fee_numeric",
+          "expr": "toNumber(datum.fee_cleaned)"
+        },
+        { "type": "filter", "expr": "datum.fee_cleaned > 0" },
         {
           "type": "formula",
           "as": "year_numeric",
@@ -43,16 +52,12 @@
         },
         {
           "type": "filter",
-          "expr": "datum.fee_cleaned !== 'NA'"
-        },
-        {
-          "type": "filter",
           "expr": "datum.transfer_movement === transferInOut"
         },
         {
           "type": "aggregate",
           "groupby": ["club_name", "league_name"],
-          "fields": ["fee_cleaned"],
+          "fields": ["fee_numeric"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
         },
@@ -68,8 +73,17 @@
       "url": "/data/liga-nos.csv",
       "format": { "type": "csv", "delimiter": "," },
       "transform": [
-        { "type": "filter", "expr": "datum.fee_cleaned > 0" },
         { "type": "filter", "expr": "datum.transfer_movement === transferInOut" },
+        {
+          "type": "filter",
+          "expr": "datum.fee_cleaned !== 'NA'"
+        },
+        {
+          "type": "formula",
+          "as": "fee_numeric",
+          "expr": "toNumber(datum.fee_cleaned)"
+        },
+        { "type": "filter", "expr": "datum.fee_cleaned > 0" },
         {
           "type": "formula",
           "as": "year_numeric",
@@ -81,9 +95,13 @@
           "expr": "datum.year_numeric >= yearMin"
         },
         {
+          "type": "filter",
+          "expr": "datum.transfer_movement === transferInOut"
+        },
+        {
           "type": "aggregate",
           "groupby": ["club_name", "league_name"],
-          "fields": ["fee_cleaned"],
+          "fields": ["fee_numeric"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
         },
@@ -99,8 +117,17 @@
       "url": "/data/ligue-1.csv",
       "format": { "type": "csv", "delimiter": "," },
       "transform": [
-        { "type": "filter", "expr": "datum.fee_cleaned > 0" },
         { "type": "filter", "expr": "datum.transfer_movement === transferInOut" },
+        {
+          "type": "filter",
+          "expr": "datum.fee_cleaned !== 'NA'"
+        },
+        {
+          "type": "formula",
+          "as": "fee_numeric",
+          "expr": "toNumber(datum.fee_cleaned)"
+        },
+        { "type": "filter", "expr": "datum.fee_cleaned > 0" },
         {
           "type": "formula",
           "as": "year_numeric",
@@ -112,9 +139,13 @@
           "expr": "datum.year_numeric >= yearMin"
         },
         {
+          "type": "filter",
+          "expr": "datum.transfer_movement === transferInOut"
+        },
+        {
           "type": "aggregate",
           "groupby": ["club_name", "league_name"],
-          "fields": ["fee_cleaned"],
+          "fields": ["fee_numeric"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
         },
@@ -130,8 +161,17 @@
       "url": "/data/premier-league.csv",
       "format": { "type": "csv", "delimiter": "," },
       "transform": [
-        { "type": "filter", "expr": "datum.fee_cleaned > 0" },
         { "type": "filter", "expr": "datum.transfer_movement === transferInOut" },
+        {
+          "type": "filter",
+          "expr": "datum.fee_cleaned !== 'NA'"
+        },
+        {
+          "type": "formula",
+          "as": "fee_numeric",
+          "expr": "toNumber(datum.fee_cleaned)"
+        },
+        { "type": "filter", "expr": "datum.fee_cleaned > 0" },
         {
           "type": "formula",
           "as": "year_numeric",
@@ -143,9 +183,13 @@
           "expr": "datum.year_numeric >= yearMin"
         },
         {
+          "type": "filter",
+          "expr": "datum.transfer_movement === transferInOut"
+        },
+        {
           "type": "aggregate",
           "groupby": ["club_name", "league_name"],
-          "fields": ["fee_cleaned"],
+          "fields": ["fee_numeric"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
         },
@@ -161,8 +205,17 @@
       "url": "/data/primera-division.csv",
       "format": { "type": "csv", "delimiter": "," },
       "transform": [
-        { "type": "filter", "expr": "datum.fee_cleaned > 0" },
         { "type": "filter", "expr": "datum.transfer_movement === transferInOut" },
+        {
+          "type": "filter",
+          "expr": "datum.fee_cleaned !== 'NA'"
+        },
+        {
+          "type": "formula",
+          "as": "fee_numeric",
+          "expr": "toNumber(datum.fee_cleaned)"
+        },
+        { "type": "filter", "expr": "datum.fee_cleaned > 0" },
         {
           "type": "formula",
           "as": "year_numeric",
@@ -174,9 +227,13 @@
           "expr": "datum.year_numeric >= yearMin"
         },
         {
+          "type": "filter",
+          "expr": "datum.transfer_movement === transferInOut"
+        },
+        {
           "type": "aggregate",
           "groupby": ["club_name", "league_name"],
-          "fields": ["fee_cleaned"],
+          "fields": ["fee_numeric"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
         },
@@ -192,8 +249,17 @@
       "url": "/data/serie-a.csv",
       "format": { "type": "csv", "delimiter": "," },
       "transform": [
-        { "type": "filter", "expr": "datum.fee_cleaned > 0" },
         { "type": "filter", "expr": "datum.transfer_movement === transferInOut" },
+        {
+          "type": "filter",
+          "expr": "datum.fee_cleaned !== 'NA'"
+        },
+        {
+          "type": "formula",
+          "as": "fee_numeric",
+          "expr": "toNumber(datum.fee_cleaned)"
+        },
+        { "type": "filter", "expr": "datum.fee_cleaned > 0" },
         {
           "type": "formula",
           "as": "year_numeric",
@@ -205,9 +271,13 @@
           "expr": "datum.year_numeric >= yearMin"
         },
         {
+          "type": "filter",
+          "expr": "datum.transfer_movement === transferInOut"
+        },
+        {
           "type": "aggregate",
           "groupby": ["club_name", "league_name"],
-          "fields": ["fee_cleaned"],
+          "fields": ["fee_numeric"],
           "ops": ["sum"],
           "as": ["total_fee_cleaned"]
         },
@@ -260,12 +330,12 @@
       "name": "color",
       "type": "ordinal",
       "range": [
-        "#a6cee3",
-        "#33a02c",
-        "#fb9a99",
-        "#e31a1c",
-        "#ff7f00",
-        "#cab2d6"
+        "#E69F00",
+        "#56B4E9",
+        "#009E73",
+        "#0072B2",
+        "#D55E00",
+        "#CC79A7"
       ]
     },
     {

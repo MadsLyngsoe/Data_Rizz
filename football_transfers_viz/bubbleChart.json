@@ -1,15 +1,15 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "A top-k bar chart ranking film directors by revenue.",
-  "width": 500,
-  "height": 410,
+  "width": 480,
+  "height": 600,
   "padding": 5,
   "autosize": "fit",
 
   "signals": [
     {
-      "name": "k", "value": 5,
-      "bind": {"input": "select", "options": [5, 10, 20, 30]}
+      "name": "k", "value": 20,
+      "bind": {"input": "range", "min": 10, "max": 50, "step": 1}
     },
     {
       "name": "sortOrder", "value": "descending",
@@ -32,7 +32,7 @@
   ],
 
   "title": {
-    "text": "HELLO",
+    "text": {"signal": "clubName + ' top transfers by fee'"},
     "anchor": "start",
     "frame": "group"
   },
@@ -49,16 +49,21 @@
         },
         {
           "type": "filter",
-          "expr": "datum.club_name === clubName"
+          "expr": "datum.fee_cleaned !== 'NA'"
         },
         {
           "type": "filter",
-          "expr": "datum.transfer_movement === transferInOut"
+          "expr": "datum.club_name === clubName"
         },
         {
           "type": "formula",
           "as": "year_numeric",
           "expr": "toNumber(datum.year)"
+        },
+        {
+          "type": "formula",
+          "as": "fee_numeric",
+          "expr": "toNumber(datum.fee_cleaned)"
         },
         {
           "type": "filter",
@@ -67,29 +72,19 @@
         {
           "type": "filter",
           "expr": "datum.year_numeric >= yearMin"
-        }
-      ]
-    },
-    {
-      "name": "ranks",
-      "source": "directors",
-      "transform": [
+        },
         {
           "type": "filter",
           "expr": "datum.transfer_movement === transferInOut"
         },
         {
           "type": "window",
-          "sort": {"field": "fee_cleaned", "order": {"signal": "sortOrder"}},
+          "sort": {"field": "fee_numeric", "order": {"signal": "sortOrder"}},
           "ops": ["row_number"], "as": ["rank"]
         },
         {
           "type": "filter",
           "expr": "datum.rank <= k"
-        },
-        {
-          "type": "collect",
-          "sort": {"field": "rank", "order": "ascending"}
         }
       ]
     }
@@ -97,17 +92,22 @@
 
   "marks": [
     {
+      "name": "rect",
       "type": "rect",
-      "from": {"data": "ranks"},
+      "from": {"data": "directors"},
       "encode": {
         "update": {
           "x": {"scale": "x", "value": 0},
-          "x2": {"scale": "x", "field": "fee_cleaned"},
+          "x2": {"scale": "x", "field": "fee_numeric"},
           "y": {"scale": "y", "field": "player_name"},
           "height": {"scale": "y", "band": 1}
         },
         "hover": {
-          "tooltip": {"signal": "datum"}
+          "tooltip": [
+            {
+              "signal": "{'Player name': datum.player_name, 'Transfered/loaned from': datum.club_involved_name, 'Transfered/loaned to': datum.club_name, 'Transfer year' : datum.year_numeric, 'Price' : datum.fee_numeric + ' Million €'}"
+          }
+        ]
         }
       }
     }
@@ -117,7 +117,7 @@
     {
       "name": "x",
       "type": "linear",
-      "domain": {"data": "ranks", "field": "fee_cleaned"},
+      "domain": {"data": "directors", "field": "fee_numeric"},
       "range": "width",
       "nice": true
     },
@@ -125,7 +125,8 @@
       "name": "y",
       "type": "band",
       "domain": {
-        "data": "ranks", "field": "player_name"
+        "data": "directors", "field": "player_name",
+        "sort": {"op": "max", "field": "fee_numeric", "order": {"signal": "sortOrder"}}
       },
       "range": "height",
       "padding": 0.1
@@ -136,8 +137,6 @@
     {
       "scale": "x",
       "orient": "bottom",
-      "format": "d",
-      "tickCount": 5,
       "title": "Transfer Fee (Million EUR)"
     },
     {
