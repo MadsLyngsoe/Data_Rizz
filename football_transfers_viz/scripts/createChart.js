@@ -175,3 +175,22 @@ function getTreemapChartView() {
 function getBubbleChartView() {
   return bubbleChartView;
 }
+
+function sliderUpdateCharts(value) {
+  var sliderValues = value.split(",");
+  if(lineChartView != null) {
+    lineChartView.signal("yearMin", parseInt(sliderValues[0]));
+    lineChartView.signal("yearMax", parseInt(sliderValues[1]));
+    lineChartView.run();
+  }
+  if(treemapChartView != null) {
+    treemapChartView.signal("yearMin", parseInt(sliderValues[0]));
+    treemapChartView.signal("yearMax", parseInt(sliderValues[1]));
+    treemapChartView.run();
+  }
+  if(bubbleChartView != null) {
+    bubbleChartView.signal("yearMin", parseInt(sliderValues[0]));
+    bubbleChartView.signal("yearMax", parseInt(sliderValues[1]));
+    bubbleChartView.run();
+  }
+}

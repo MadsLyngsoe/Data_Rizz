@@ -42,34 +42,8 @@
               data-cls-hint="bg-cyan custom-marker shadow-2"
               data-cls-complete="bg-red"
               data-cls-min-max="text-bold"
+              onchange="sliderUpdateCharts(this.value)"
             >  
-            <script>
-              window.addEventListener('load', function () {
-                var buttons = document.getElementsByTagName('Button');
-                buttons[0].addEventListener('mouseup', function () { 
-                  var sliderValues = document.getElementById("slider").value.split(",");
-                  getLineChartView().signal("yearMin", parseInt(sliderValues[0]));
-                  getTreemapChartView().signal("yearMin", parseInt(sliderValues[0]));
-                  if(getBubbleChartView() != null) {
-                    getBubbleChartView().signal("yearMin", parseInt(sliderValues[0]));
-                    getBubbleChartView().run();
-                  }
-                  getLineChartView().run();
-                  getTreemapChartView().run();
-                });
-                buttons[1].addEventListener('mouseup', function () { 
-                  var sliderValues = document.getElementById("slider").value.split(",");
-                  getLineChartView().signal("yearMax", parseInt(sliderValues[1]));
-                  getTreemapChartView().signal("yearMax", parseInt(sliderValues[1]));
-                  if(getBubbleChartView() != null) {
-                    getBubbleChartView().signal("yearMax", parseInt(sliderValues[1]));
-                    getBubbleChartView().run();
-                  }
-                  getLineChartView().run();
-                  getTreemapChartView().run();
-                });
-            })
-            </script>
           </div>
         </div>
         <div class="row" id="row1">
