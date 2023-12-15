@@ -370,7 +370,7 @@
             },
             {
               "name": "yscale", "type": "linear",
-              "domain": {"data": "leagueData", "field": "total_fee_cleaned"},
+              "domain": [0, 24000],
               "range": "height",
               "nice": true,
               "round": true

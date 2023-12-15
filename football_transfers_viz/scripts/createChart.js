@@ -129,7 +129,7 @@ fetch(chartSpec)
         treemapChartView.signal("yearMin", sliderValues[0]);
         treemapChartView.signal("yearMax", sliderValues[1]);
         treemapChartView.run();
-    }).catch(console.warn);
+    });
   });
 }
 
@@ -154,7 +154,6 @@ fetch(chartSpec)
         "name": "year", "value": yearMin,
         "bind": {"input": "range", "min": yearMin, "max": yearMax, "step": 1}
       });
-      console.log(spec.signals)
       spec.data[0].transform[5].expr = "datum.year_numeric == year";
       spec.title.text ={ signal: "clubName + ' top transfered players by fee' + ' in year ' + year" }
     }
