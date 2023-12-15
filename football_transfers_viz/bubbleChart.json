@@ -48,11 +48,11 @@
         },
         {
           "type": "filter",
-          "expr": "datum.fee_cleaned !== 'NA'"
+          "expr": "datum.fee_cleaned != 'NA'"
         },
         {
           "type": "filter",
-          "expr": "datum.club_name === clubName"
+          "expr": "datum.club_name == clubName"
         },
         {
           "type": "formula",
@@ -74,7 +74,7 @@
         },
         {
           "type": "filter",
-          "expr": "datum.transfer_movement === transferInOut"
+          "expr": "datum.transfer_movement == transferInOut"
         },
         {
           "type": "window",

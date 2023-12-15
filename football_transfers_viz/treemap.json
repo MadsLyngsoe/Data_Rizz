@@ -31,10 +31,10 @@
       "url": "/data/1-bundesliga.csv",
       "format": { "type": "csv", "delimiter": "," },
       "transform": [
-        { "type": "filter", "expr": "datum.transfer_movement === transferInOut" },
+        { "type": "filter", "expr": "datum.transfer_movement == transferInOut" },
         {
           "type": "filter",
-          "expr": "datum.fee_cleaned !== 'NA'"
+          "expr": "datum.fee_cleaned != 'NA'"
         },
         {
           "type": "formula",
@@ -54,7 +54,7 @@
         },
         {
           "type": "filter",
-          "expr": "datum.transfer_movement === transferInOut"
+          "expr": "datum.transfer_movement == transferInOut"
         },
         {
           "type": "aggregate",
@@ -75,10 +75,10 @@
       "url": "/data/liga-nos.csv",
       "format": { "type": "csv", "delimiter": "," },
       "transform": [
-        { "type": "filter", "expr": "datum.transfer_movement === transferInOut" },
+        { "type": "filter", "expr": "datum.transfer_movement == transferInOut" },
         {
           "type": "filter",
-          "expr": "datum.fee_cleaned !== 'NA'"
+          "expr": "datum.fee_cleaned != 'NA'"
         },
         {
           "type": "formula",
@@ -98,7 +98,7 @@
         },
         {
           "type": "filter",
-          "expr": "datum.transfer_movement === transferInOut"
+          "expr": "datum.transfer_movement == transferInOut"
         },
         {
           "type": "aggregate",
@@ -119,10 +119,10 @@
       "url": "/data/ligue-1.csv",
       "format": { "type": "csv", "delimiter": "," },
       "transform": [
-        { "type": "filter", "expr": "datum.transfer_movement === transferInOut" },
+        { "type": "filter", "expr": "datum.transfer_movement == transferInOut" },
         {
           "type": "filter",
-          "expr": "datum.fee_cleaned !== 'NA'"
+          "expr": "datum.fee_cleaned != 'NA'"
         },
         {
           "type": "formula",
@@ -142,7 +142,7 @@
         },
         {
           "type": "filter",
-          "expr": "datum.transfer_movement === transferInOut"
+          "expr": "datum.transfer_movement == transferInOut"
         },
         {
           "type": "aggregate",
@@ -163,10 +163,10 @@
       "url": "/data/premier-league.csv",
       "format": { "type": "csv", "delimiter": "," },
       "transform": [
-        { "type": "filter", "expr": "datum.transfer_movement === transferInOut" },
+        { "type": "filter", "expr": "datum.transfer_movement == transferInOut" },
         {
           "type": "filter",
-          "expr": "datum.fee_cleaned !== 'NA'"
+          "expr": "datum.fee_cleaned != 'NA'"
         },
         {
           "type": "formula",
@@ -186,7 +186,7 @@
         },
         {
           "type": "filter",
-          "expr": "datum.transfer_movement === transferInOut"
+          "expr": "datum.transfer_movement == transferInOut"
         },
         {
           "type": "aggregate",
@@ -207,10 +207,10 @@
       "url": "/data/primera-division.csv",
       "format": { "type": "csv", "delimiter": "," },
       "transform": [
-        { "type": "filter", "expr": "datum.transfer_movement === transferInOut" },
+        { "type": "filter", "expr": "datum.transfer_movement == transferInOut" },
         {
           "type": "filter",
-          "expr": "datum.fee_cleaned !== 'NA'"
+          "expr": "datum.fee_cleaned != 'NA'"
         },
         {
           "type": "formula",
@@ -230,7 +230,7 @@
         },
         {
           "type": "filter",
-          "expr": "datum.transfer_movement === transferInOut"
+          "expr": "datum.transfer_movement == transferInOut"
         },
         {
           "type": "aggregate",
@@ -251,10 +251,10 @@
       "url": "/data/serie-a.csv",
       "format": { "type": "csv", "delimiter": "," },
       "transform": [
-        { "type": "filter", "expr": "datum.transfer_movement === transferInOut" },
+        { "type": "filter", "expr": "datum.transfer_movement == transferInOut" },
         {
           "type": "filter",
-          "expr": "datum.fee_cleaned !== 'NA'"
+          "expr": "datum.fee_cleaned != 'NA'"
         },
         {
           "type": "formula",
@@ -274,7 +274,7 @@
         },
         {
           "type": "filter",
-          "expr": "datum.transfer_movement === transferInOut"
+          "expr": "datum.transfer_movement == transferInOut"
         },
         {
           "type": "aggregate",
