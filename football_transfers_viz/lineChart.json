@@ -59,7 +59,7 @@
       "transform": [
         {
           "type": "filter",
-          "expr": "datum.fee_cleaned !== 'NA'"
+          "expr": "datum.fee_cleaned != 'NA'"
         },
         {
           "type": "formula",
@@ -72,7 +72,7 @@
         },
         {
           "type": "filter",
-          "expr": "datum.transfer_movement === transferInOut"
+          "expr": "datum.transfer_movement == transferInOut"
         },
         {
           "type": "formula",
@@ -109,7 +109,7 @@
       "transform": [
         {
           "type": "filter",
-          "expr": "datum.fee_cleaned !== 'NA'"
+          "expr": "datum.fee_cleaned != 'NA'"
         },
         {
           "type": "formula",
@@ -122,7 +122,7 @@
         },
         {
           "type": "filter",
-          "expr": "datum.transfer_movement === transferInOut"
+          "expr": "datum.transfer_movement == transferInOut"
         },
         {
           "type": "formula",
@@ -159,7 +159,7 @@
       "transform": [
         {
           "type": "filter",
-          "expr": "datum.fee_cleaned !== 'NA'"
+          "expr": "datum.fee_cleaned != 'NA'"
         },
         {
           "type": "formula",
@@ -172,7 +172,7 @@
         },
         {
           "type": "filter",
-          "expr": "datum.transfer_movement === transferInOut"
+          "expr": "datum.transfer_movement == transferInOut"
         },
         {
           "type": "formula",
@@ -209,7 +209,7 @@
       "transform": [
         {
           "type": "filter",
-          "expr": "datum.fee_cleaned !== 'NA'"
+          "expr": "datum.fee_cleaned != 'NA'"
         },
         {
           "type": "formula",
@@ -222,7 +222,7 @@
         },
         {
           "type": "filter",
-          "expr": "datum.transfer_movement === transferInOut"
+          "expr": "datum.transfer_movement == transferInOut"
         },
         {
           "type": "formula",
@@ -259,7 +259,7 @@
       "transform": [
         {
           "type": "filter",
-          "expr": "datum.fee_cleaned !== 'NA'"
+          "expr": "datum.fee_cleaned != 'NA'"
         },
         {
           "type": "formula",
@@ -272,7 +272,7 @@
         },
         {
           "type": "filter",
-          "expr": "datum.transfer_movement === transferInOut"
+          "expr": "datum.transfer_movement == transferInOut"
         },
         {
           "type": "formula",
@@ -309,7 +309,7 @@
       "transform": [
         {
           "type": "filter",
-          "expr": "datum.fee_cleaned !== 'NA'"
+          "expr": "datum.fee_cleaned != 'NA'"
         },
         {
           "type": "formula",
@@ -322,7 +322,7 @@
         },
         {
           "type": "filter",
-          "expr": "datum.transfer_movement === transferInOut"
+          "expr": "datum.transfer_movement == transferInOut"
         },
         {
           "type": "formula",
