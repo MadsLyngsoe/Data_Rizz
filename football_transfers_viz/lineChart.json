@@ -474,7 +474,7 @@
               "test": "(!length(data('selected')) || indata('selected', 'value', '1 Bundesliga'))",
               "value": 1
             },
-            { "value": 0 }
+            { "value": 0.1 }
           ],
           "stroke": [
             { "value": "#E69F00" }
@@ -515,7 +515,7 @@
               "test": "(!length(data('selected')) || indata('selected', 'value', '1 Bundesliga'))",
               "value": 1
             },
-            { "value": 0 }
+            { "value": 0.1 }
           ],
           "fill": { "value": "#E69F00" }
         }
@@ -538,7 +538,7 @@
               "test": "(!length(data('selected')) || indata('selected', 'value', 'Liga Nos'))",
               "value": 1
             },
-            { "value": 0 }
+            { "value": 0.1 }
           ],
           "stroke": [
             { "value": "#56B4E9" }
@@ -571,7 +571,7 @@
               "test": "(!length(data('selected')) || indata('selected', 'value', 'Liga Nos'))",
               "value": 1
             },
-            { "value": 0 }
+            { "value": 0.1 }
           ],
           "stroke": [
             {
@@ -602,7 +602,7 @@
               "test": "(!length(data('selected')) || indata('selected', 'value', 'Ligue 1'))",
               "value": 1
             },
-            { "value": 0 }
+            { "value": 0.1 }
           ],
           "stroke": [
             { "value": "#009E73" }
@@ -635,7 +635,7 @@
               "test": "(!length(data('selected')) || indata('selected', 'value', 'Ligue 1'))",
               "value": 1
             },
-            { "value": 0 }
+            { "value": 0.1 }
           ],
           "stroke": [
             {
@@ -666,7 +666,7 @@
               "test": "(!length(data('selected')) || indata('selected', 'value', 'Premier League'))",
               "value": 1
             },
-            { "value": 0 }
+            { "value": 0.1 }
           ],
           "stroke": [
             { "value": "#0072B2" }
@@ -699,7 +699,7 @@
               "test": "(!length(data('selected')) || indata('selected', 'value', 'Premier League'))",
               "value": 1
             },
-            { "value": 0 }
+            { "value": 0.1 }
           ],
           "stroke": [
             {
@@ -730,7 +730,7 @@
               "test": "(!length(data('selected')) || indata('selected', 'value', 'Primera Division'))",
               "value": 1
             },
-            { "value": 0 }
+            { "value": 0.1 }
           ],
           "stroke": [
             { "value": "#D55E00" }
@@ -763,7 +763,7 @@
               "test": "(!length(data('selected')) || indata('selected', 'value', 'Primera Division'))",
               "value": 1
             },
-            { "value": 0 }
+            { "value": 0.1 }
           ],
           "stroke": [
             {
@@ -794,7 +794,7 @@
               "test": "(!length(data('selected')) || indata('selected', 'value', 'Serie A'))",
               "value": 1
             },
-            { "value": 0 }
+            { "value": 0.1 }
           ],
           "stroke": [
             { "value": "#CC79A7" }
@@ -827,7 +827,7 @@
               "test": "(!length(data('selected')) || indata('selected', 'value', 'Serie A'))",
               "value": 1
             },
-            { "value": 0 }
+            { "value": 0.1 }
           ],
           "stroke": [
             {

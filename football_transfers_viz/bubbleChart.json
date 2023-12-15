@@ -136,7 +136,8 @@
     {
       "scale": "x",
       "orient": "bottom",
-      "title": "Transfer Fee (Million EUR)"
+      "title": "Transfer Fee (Million EUR)",
+      "grid": true
     },
     {
       "scale": "y",

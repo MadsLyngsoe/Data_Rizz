@@ -46,6 +46,10 @@ fetch(chartSpec)
     }
     }
     lineChartView = result.view;
+    var sliderValues = document.getElementById("slider").value.split(",");
+    lineChartView.signal("yearMin", sliderValues[0]);
+    lineChartView.signal("yearMax", sliderValues[1]);
+    lineChartView.run();
     });
   });
   createTreemap("#col2-1", "treemap.json");

@@ -446,8 +446,8 @@
               "from": {"data": "leagueData"},
               "encode":{
                 "enter": {
-                  "x": {"scale": "xscale", "field": "league_name"},
-                  "width": {"scale": "xscale", "band": 1, "offset": -1},
+                  "x": {"scale": "xscale", "band": 0.2, "field": "league_name"},
+                  "width": {"scale": "xscale", "band": 0.6},
                   "fill": { "scale": "color", "field": "league_name" }
                 },
                 "update": {
