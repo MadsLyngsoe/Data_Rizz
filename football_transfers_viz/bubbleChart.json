@@ -8,8 +8,8 @@
 
   "signals": [
     {
-      "name": "k", "value": 20,
-      "bind": {"input": "range", "min": 10, "max": 50, "step": 1}
+      "name": "k", "value": 5,
+      "bind": {"input": "range", "min": 5, "max": 50, "step": 1}
     },
     {
       "name": "sortOrder", "value": "descending",

@@ -455,7 +455,7 @@
                   "y2": {"scale": "yscale", "value": 0}
                 },
                 "hover": {
-                    "tooltip": {"signal": "{'Total Transfer Fee': datum.total_fee_cleaned + ' Million €', 'League': '1 Bundesliga', 'Period': yearMin + ' - ' + yearMax}"}
+                    "tooltip": {"signal": "{'Total Transfer Fee': datum.total_fee_cleaned + ' Million €', 'League': datum.league_name, 'Period': yearMin + ' - ' + yearMax}"}
                 }
               }
             }
