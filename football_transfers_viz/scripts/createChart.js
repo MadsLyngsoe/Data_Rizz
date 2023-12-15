@@ -151,7 +151,7 @@ fetch(chartSpec)
     }
     if(!document.getElementById("checkbox1").checked) {
       spec.signals.push({
-        "name": "year", "value": yearMin,
+        "name": "year", "value": treemapChartView.signal("year"),
         "bind": {"input": "range", "min": yearMin, "max": yearMax, "step": 1}
       });
       spec.data[0].transform[5].expr = "datum.year_numeric == year";
@@ -192,6 +192,16 @@ fetch(chartSpec)
         result.view.run();
       }
       bubbleChartView = result.view;
+      if(!document.getElementById("checkbox1").checked) {
+        bubbleChartView.addSignalListener("year", function(name, value) {
+          treemapChartView.signal("year", value);
+          treemapChartView.run();
+        })
+        treemapChartView.addSignalListener("year", function(name,othervalue) {
+          bubbleChartView.signal("year", othervalue);
+          bubbleChartView.run();
+        })
+      }
     }
     );
   });
