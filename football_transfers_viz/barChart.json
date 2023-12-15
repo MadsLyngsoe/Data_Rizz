@@ -399,7 +399,7 @@
         
           "axes": [
             {"orient": "left", "grid": true, "scale": "yscale"},
-            {"orient": "bottom", "grid": true, "scale": "xscale"}
+            {"orient": "bottom", "grid": false, "scale": "xscale"}
           ],
 
           "legends": [
@@ -446,8 +446,8 @@
               "from": {"data": "leagueData"},
               "encode":{
                 "enter": {
-                  "x": {"scale": "xscale", "band": 0.2, "field": "league_name"},
-                  "width": {"scale": "xscale", "band": 0.6},
+                  "x": {"scale": "xscale", "band": 0.25, "field": "league_name"},
+                  "width": {"scale": "xscale", "band": 0.5},
                   "fill": { "scale": "color", "field": "league_name" }
                 },
                 "update": {

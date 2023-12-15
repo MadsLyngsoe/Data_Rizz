@@ -156,7 +156,6 @@ fetch(chartSpec)
     if(!document.getElementById("checkbox1").checked) {
       spec.signals.push({
         "name": "year", "value": treemapChartView.signal("year"),
-        "bind": {"input": "range", "min": yearMin, "max": yearMax, "step": 1}
       });
       spec.data[0].transform[5].expr = "datum.year_numeric == year";
       spec.title.text ={ signal: "clubName + ' top transfered players by fee' + ' in year ' + year" }
