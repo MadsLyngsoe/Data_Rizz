@@ -311,7 +311,7 @@
           "round": true,
           "field": "total_fee_cleaned",
           "sort": { "field": "total_fee_cleaned" },
-          "method": "binary",
+          "method": "squarify",
           "size": [{ "signal": "width" }, { "signal": "height" }]
         }
       ]
