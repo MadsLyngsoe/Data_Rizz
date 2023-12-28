@@ -31,7 +31,7 @@
   ],
 
   "title": {
-    "text": {"signal": "clubName + ' top transfered players by fee ' + yearMin + ' - ' + yearMax"},
+    "text": {"signal": "clubName + ' top k transfered players by fee ' + yearMin + ' - ' + yearMax"},
     "anchor": "start",
     "frame": "group"
   },

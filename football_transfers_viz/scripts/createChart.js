@@ -158,7 +158,7 @@ fetch(chartSpec)
         "name": "year", "value": treemapChartView.signal("year"),
       });
       spec.data[0].transform[5].expr = "datum.year_numeric == year";
-      spec.title.text ={ signal: "clubName + ' top transfered players by fee' + ' in year ' + year" }
+      spec.title.text ={ signal: "clubName + ' top k transfered players by fee' + ' in year ' + year" }
     }
     switch(leagueName) {
       case "1 Bundesliga":
